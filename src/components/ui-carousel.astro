@@ -1,0 +1,57 @@
+---
+import '@splidejs/splide/css';
+
+// STYLES ==================================================================================================================================
+const {class: cEl = ''} = Astro.props;
+---
+
+<div class:list={['splide', cEl]} role="group" aria-label="Splide Basic HTML Example">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <slot />
+    </ul>
+  </div>
+</div>
+
+<script>
+  import Splide from '@splidejs/splide';
+
+  document.querySelectorAll('.splide').forEach((el) => {
+    const splide = new Splide(el as HTMLElement, {
+      fixedWidth: '24rem',
+      gap: '2rem',
+      padding: '1rem',
+      pagination: false,
+      type: 'loop',
+    });
+
+    splide.on('overflow', (isOverflow) => {
+      splide.go(0);
+      splide.options = {arrows: isOverflow, drag: isOverflow, clones: isOverflow ? undefined : 0};
+    });
+
+    splide.mount();
+  });
+</script>
+
+<style is:global>
+  .splide__arrow {
+    background-color: rgb(var(--color-primary)) !important;
+  }
+
+  .splide__arrow svg {
+    fill: white !important;
+  }
+
+  .splide:not(.is-overflow) .splide__arrows {
+    display: none;
+  }
+
+  .splide:not(.is-overflow) .splide__list {
+    justify-content: center;
+  }
+
+  .splide:not(.is-overflow) .splide__slide:last-child {
+    margin-right: 0 !important;
+  }
+</style>

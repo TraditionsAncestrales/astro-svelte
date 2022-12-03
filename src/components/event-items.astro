@@ -1,0 +1,11 @@
+---
+import UiSection from "./ui-section.astro";
+
+// PROPS ===================================================================================================================================
+const {items = [], ...rest} = Astro.props;
+
+---
+
+<UiSection title="Les prochains événements" {...rest}>
+	<p>Il n'y a actuellement aucun événement prévu.</p>
+</UiSection>

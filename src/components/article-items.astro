@@ -1,0 +1,19 @@
+---
+import type { z } from 'zod';
+import type { zArticleItemsP } from '~/data/schemas.ui';
+import UiSection from './ui-section.astro';
+import UiText from './ui-text.astro';
+
+// PROPS ===================================================================================================================================
+const {intent = 'white', items, ...rest} = Astro.props;
+
+// VARS ====================================================================================================================================
+const {excerpt, image, title, uri} = items[0];
+
+// TYPES ===================================================================================================================================
+export type Props = z.infer<typeof zArticleItemsP>;
+---
+
+<UiSection image={image} title={title} intent={intent} uri={uri} {...rest}>
+  <UiText value={excerpt} />
+</UiSection>

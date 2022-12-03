@@ -1,0 +1,57 @@
+---
+import type { z } from 'zod';
+import type { Workshop } from '~/data/schemas';
+import type { zWorkshopItemsP } from '~/data/schemas.ui';
+import { BTN } from '~/styles/ui';
+import UiCarousel from './ui-carousel.astro';
+import UiFeatures from './ui-features.astro';
+import UiSection from './ui-section.astro';
+import UiText from './ui-text.astro';
+
+// PROPS ===================================================================================================================================
+const {intent = 'white', items = [], ...rest} = Astro.props;
+
+// VARS ====================================================================================================================================
+const hasSome = items.length > 0;
+const hasSingle = items.length === 1;
+const title = `Atelier${hasSingle ? '' : 's'}`;
+const item = hasSingle ? items[0] : undefined;
+const featuresFor = ({duration, places, price}: Pick<Workshop, 'duration' | 'places' | 'price'>) => [
+  {key: 'Tarif', value: price},
+  {key: 'Durée', value: duration},
+  {key: 'Endroits', value: places.map(({title}) => title).join(', ')},
+];
+
+// TYPES ===================================================================================================================================
+export type Props = z.infer<typeof zWorkshopItemsP>;
+---
+
+{
+  hasSome && (
+    <UiSection intent={intent} title={title} image={item?.image} uri={item?.uri} expanded={!hasSingle} {...rest}>
+      {item ? (
+        <>
+          <UiFeatures intent={intent} items={featuresFor(item)} class="mb-4" />
+          <UiText value={item?.excerpt} />
+        </>
+      ) : (
+        <UiCarousel class="w-full">
+          {items.map(({duration, excerpt, image, places, price, title, uri}) => (
+            <li class="splide__slide shadow-md bg-white mb-2 flex flex-col">
+              <img src={image.url} alt="" class="flex-none aspect-[3/2] object-cover" />
+              <div class="flex-1 flex flex-col px-8 py-4">
+                <h4 class="mb-4 font-heading text-2xl first-letter:text-primary first-letter:text-4xl">{title}</h4>
+                <UiFeatures items={featuresFor({duration, places, price})} intent="white" class="mb-4" />
+                <UiText value={excerpt} />
+                <div class="flex-1" />
+                <a href={uri} class:list={[BTN(), 'self-end mt-8']}>
+                  En savoir plus
+                </a>
+              </div>
+            </li>
+          ))}
+        </UiCarousel>
+      )}
+    </UiSection>
+  )
+}

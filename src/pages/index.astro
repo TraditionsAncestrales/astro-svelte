@@ -1,15 +1,18 @@
 ---
+import ArticleItems from '~/components/article-items.astro';
+import EventItems from '~/components/event-items.astro';
+import TestimonyItems from '~/components/testimony-items.astro';
+import { getGeneralKnowledgeData } from '~/data/api';
+import Layout from '../layouts/layout.astro';
+
+// DATA ====================================================================================================================================
+const data = await getGeneralKnowledgeData();
+const {article, events, layout, testimonies} = data;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<Layout {...layout}>
+  <ArticleItems items={[article]} title="Bienvenue" border="top" cImage="max-w-xs" cImageImg="aspect-none" />
+  <EventItems items={events} intent="light" />
+  <TestimonyItems items={testimonies} />
+  <ArticleItems items={[layout.organization]} border="bottom" intent="primary" />
+</Layout>

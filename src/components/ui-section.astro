@@ -1,0 +1,47 @@
+---
+import Icon from 'astro-icon';
+import { cx } from 'class-variance-authority';
+import type { z } from 'zod';
+import type { zUiSectionP } from '~/data/schemas.ui';
+import { bg,BTN,text } from '~/styles/ui';
+import UiImage from './ui-image.astro';
+import UiTitle from './ui-title.astro';
+
+// PROPS ===================================================================================================================================
+const {border = 'none', expanded = false, image, imageRight = false, intent = 'white', title, uri} = Astro.props;
+
+// VARS ====================================================================================================================================
+const hasBorderBottom = ['all', 'bottom'].includes(border);
+const hasBorderTop = ['all', 'top'].includes(border);
+const imageBorder = intent === 'primary' ? 1 : 2;
+
+// STYLES ==================================================================================================================================
+const {class: cEl = '', cBorder: kBorder = '', cImage: kImage = 'max-w-lg', cImageImg: kImageImg = 'aspect-[3/2]'} = Astro.props;
+const {"class:list": classes = []} = Astro.props;
+const cBorder = ['relative w-full h-16', text(intent), kBorder];
+const cStain = intent === 'primary' ? 'text-white/50' : 'text-primary/50';
+const cImage = ['flex-none', kImage];
+const cImageImg = cx(['object-cover', kImageImg]);
+
+// TYPES ===================================================================================================================================
+export type Props = z.infer<typeof zUiSectionP>;
+---
+
+{hasBorderTop && <Icon name="border" class:list={[...cBorder, '-mt-16']} />}
+<section class:list={['overflow-hidden', {'pt-4': hasBorderTop}, expanded ? 'py-12' : 'p-12', bg(intent), cEl, ...classes]}>
+  <div class:list={['flex items-start gap-8', expanded ? 'w-full' : 'container mx-auto']}>
+    {image && <UiImage image={image} class:list={cImage} border={imageBorder} right={imageRight} cImg={cImageImg} />}
+    <div class="flex-1 max-w-full flex flex-col items-start">
+      <div class:list={{'mx-12': expanded}}><UiTitle title={title} cStain={cx(['-top-1', cStain])} /></div>
+      <slot />
+      {
+        uri && (
+          <a href={uri} class:list={['mt-8 self-end', BTN({intent: intent === 'primary' ? 'secondary' : 'primary'})]}>
+            En savoir plus
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
+{hasBorderBottom && <Icon name="border" class:list={[...cBorder, 'rotate-180']} />}

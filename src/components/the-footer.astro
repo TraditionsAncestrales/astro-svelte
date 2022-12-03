@@ -1,0 +1,54 @@
+---
+import { Sprite } from 'astro-icon';
+import type { z } from 'zod';
+import type { zTheFooterP } from '~/data/schemas.ui';
+import UiSection from './ui-section.astro';
+
+// PROPS ===================================================================================================================================
+const {city, email, fb, phone, street, zipcode} = Astro.props;
+
+// STYLES ==================================================================================================================================
+const {class: cEl = '', 'class:list': classes = []} = Astro.props;
+
+// TYPES ===================================================================================================================================
+export type Props = z.infer<typeof zTheFooterP>;
+---
+
+<UiSection border="top" intent="dark" class:list={['text-white items-center', cEl, classes]}>
+  <div class="container flex justify-between items-center">
+    <dl class="list-dl">
+      <div class="flex items-center gap-4 p-3">
+        <Sprite name="bi:pin-map" class="w-6 h-6 text-primary" />
+        <span class="flex-auto">
+          <dt>{street}</dt>
+          <dd>{zipcode} {city}</dd>
+        </span>
+      </div>
+      <div class="flex items-center gap-4 p-3">
+        <Sprite name="ph:at" class="w-6 h-6 text-primary" />
+        <span class="flex-auto">
+          <dd>{email}</dd>
+        </span>
+      </div>
+      <div class="flex items-center gap-4 p-3">
+        <Sprite name="bi:phone" class="w-6 h-6 text-primary" />
+        <span class="flex-auto">
+          <dd>{phone}</dd>
+        </span>
+      </div>
+    </dl>
+    <div class="flex flex-col gap-3 items-end">
+      <div class="flex items-center justify-center gap-4">
+        <a href="/" class="unstyled text-primary hover:text-primary-300"><Sprite name="ph:facebook-logo-thin" class="w-12 h-12" /></a>
+        <a href="/" class="unstyled text-primary hover:text-primary-300"><Sprite name="ph:instagram-logo-thin" class="w-12 h-12" /></a>
+        <a href="/" class="unstyled text-primary hover:text-primary-300"><Sprite name="ph:youtube-logo-thin" class="w-12 h-12" /></a>
+      </div>
+      <hr class="border-dashed border-light w-full" />
+      <div class="flex flex-col items-end">
+        <span>©2022 L'ENVOL - LA RÉUNION</span>
+        <span class="text-sm">Tous droits réservés</span>
+      </div>
+      <span class="text-sm text-surface-500">mentions légales</span>
+    </div>
+  </div>
+</UiSection>

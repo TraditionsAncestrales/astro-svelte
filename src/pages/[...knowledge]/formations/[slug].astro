@@ -1,0 +1,23 @@
+---
+import UiSection from '~/components/ui-section.astro';
+import UiText from '~/components/ui-text.astro';
+import UiTitle from '~/components/ui-title.astro';
+import { getTrainingData } from '~/data/api';
+import Layout from '~/layouts/layout.astro';
+
+// PATHS ===================================================================================================================================
+//export { getTrainingPaths as getStaticPaths } from '~/data/api';
+
+// DATA ====================================================================================================================================
+const {slug} = Astro.params;
+const data = await getTrainingData(slug as string);
+const {entry, layout} = data;
+const {description, image, title} = entry;
+---
+
+<Layout {...layout}>
+  <UiSection border="all" intent="white" image={image} imageRight cImageImg="aspect-none">
+    <UiTitle title={title} />
+    <UiText value={description} />
+  </UiSection>
+</Layout>

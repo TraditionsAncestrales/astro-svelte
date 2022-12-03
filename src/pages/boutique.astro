@@ -1,0 +1,13 @@
+---
+import ProductItems from '~/components/product-items.astro';
+import { getShopData } from '~/data/api';
+import Layout from '~/layouts/layout.astro';
+
+// DATA ====================================================================================================================================
+const data = await getShopData();
+const {items, layout} = data;
+---
+
+<Layout {...layout}>
+  <ProductItems border="top" items={items} class="pb-24" />
+</Layout>

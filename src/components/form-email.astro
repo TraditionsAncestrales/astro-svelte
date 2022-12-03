@@ -1,0 +1,24 @@
+---
+import { Sprite } from 'astro-icon';
+import FormControl from './form-control.astro';
+
+// PROPS ===================================================================================================================================
+const {init, label, name, placeholder} = Astro.props;
+
+// STYLES ==================================================================================================================================
+const {cInput= '', class: cEl = '', 'class:list': classes} = Astro.props;
+
+// VARS ====================================================================================================================================
+//let value = init ? form?.values?.[name] ?? '' : '';
+//$: errors = form?.data?.fieldErrors?.[name] ?? [];
+const errors: string[] = [];
+
+// TYPES ===================================================================================================================================
+---
+
+<FormControl errors={errors} label={label} name={name} class:list={['w-full', cEl, classes]}>
+  <div class="relative w-full flex items-center">
+    <Sprite name="teenyicons:envelope-solid" class="absolute z-10 left-2 w-5 h-5 text-secondary/30" />
+    <input {name} type="email" bind:value placeholder={placeholder ?? label ?? name} class:list={['w-full pl-8 py-2.5 text-sm',cInput]} />
+  </div>
+</FormControl>

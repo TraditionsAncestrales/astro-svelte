@@ -1,0 +1,29 @@
+---
+import ArticleItems from '~/components/article-items.astro';
+import ConsultationItems from '~/components/consultation-items.astro';
+import EventItems from '~/components/event-items.astro';
+import TrainingItems from '~/components/training-items.astro';
+import WorkshopItems from '~/components/workshop-items.astro';
+import { getKnowledgeData } from '~/data/api';
+import Layout from '~/layouts/layout.astro';
+
+// PATHS ===================================================================================================================================
+//export { getKnowledgePaths as getStaticPaths } from '~/data/api';
+
+// DATA ====================================================================================================================================
+const {knowledge} = Astro.params;
+const {article, consultations, events, layout, trainings, workshops} = await getKnowledgeData(knowledge as string);
+
+// VARS ==================================================================================================================================
+const count = +(consultations.length > 0) + +(workshops.length > 0) + +(trainings.length > 0);
+const consultationsIntent = count > 1 ? 'primary' : 'light';
+const trainingsIntent = count === 3 ? 'white' : 'light';
+---
+
+<Layout {...layout}>
+  <ArticleItems items={[article]} border="top" />
+  <ConsultationItems items={consultations} intent={consultationsIntent} />
+  <WorkshopItems items={workshops} intent="light" />
+  <TrainingItems items={trainings} intent={trainingsIntent} />
+  <EventItems items={events} border="bottom" intent="primary" />
+</Layout>

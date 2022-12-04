@@ -10,7 +10,7 @@ export const qUri = (type: PageType) => {
   return `'/' + ${qKnowledgeSlug} + '/${URL_DIRS[type]}/' + ${qSlug}`;
 };
 
-export const qImageProp = `'image': image.asset->{url}`;
+export const qImageProp = `'image': image`;
 export const qKnowledgeSlugProp = `'knowledge': ${qKnowledgeSlug}`;
 export const qSlugProp = `'slug': ${qSlug}`;
 export const qUriProp = (type: PageType) => `'uri': ${qUri(type)}`;

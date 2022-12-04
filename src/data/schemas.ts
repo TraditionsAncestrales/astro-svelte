@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {zSanityBlock, zSanityImageAsset} from './schemas.sanity';
+import {zSanityBlock, zSanityImage, zSanityReference} from './schemas.sanity';
 import {fill, fillString, parseFormDataValue} from './utils';
 
 // ENUMS ===================================================================================================================================
@@ -23,7 +23,7 @@ export const URL_DIRS = {
 export const zForm = z.object({data: z.any(), type: zFormType, values: z.any()});
 
 // IMAGE ===================================================================================================================================
-export const zImage = zSanityImageAsset.pick({url: true});
+export const zImage = zSanityImage.extend({asset: zSanityReference});
 
 // ITEM ====================================================================================================================================
 export const zItem = z.object({

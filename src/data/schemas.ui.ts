@@ -67,7 +67,7 @@ export const zUiImageP = zUiImageData.merge(zUiImageStyles);
 
 // UI TITLE ================================================================================================================================
 export const zUiTitleData = z.object({title: z.string().optional()});
-export const zUiTitleStyles = zComponentStyles.extend(fillClass('cImageImg', 'cStain'));
+export const zUiTitleStyles = zComponentStyles.extend(fillClass('cImageImg', 'cStain', 'cTitle'));
 export const zUiTitleP = zUiTitleData.merge(zUiTitleStyles);
 
 // UI SECTION ==============================================================================================================================

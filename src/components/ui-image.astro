@@ -1,12 +1,13 @@
 ---
 import type { z } from 'zod';
 import type { zUiImageP } from '~/data/schemas.ui';
+import UiImg from './ui-img.astro';
 
 // PROPS =================================================================================================================================
 const {border, image, right = false} = Astro.props;
 
 // STYLES ================================================================================================================================
-const {cBorder = '', cImg = '', class: cEl, 'class:list': classes} = Astro.props;
+const {cBorder = '', cImg = '', class: cEl = '', 'class:list': classes = []} = Astro.props;
 const cBorderImageSource = border === 1 ? '[border-image-source:url(/deco1.png)]' : '[border-image-source:url(/deco2.png)]';
 const cBorderImage = `[border-image-repeat:round] [border-image-slice:60_fill] [border-image-width:60px] ${cBorderImageSource}`;
 
@@ -14,7 +15,7 @@ const cBorderImage = `[border-image-repeat:round] [border-image-slice:60_fill] [
 export type Props = z.infer<typeof zUiImageP>;
 ---
 
-<div class:list={['relative mb-4 ml-4', cEl, classes]}>
+<div class:list={['relative mb-4 ml-4', cEl, ...classes]}>
   {border && <div class:list={['absolute inset-0 translate-y-10', right ? 'translate-x-10' : '-translate-x-10', cBorderImage, cBorder]} />}
-  <img alt="" src={image.url} class:list={['relative shadow', cImg]} />
+  <UiImg image={image} class:list={['relative shadow', cImg]} />
 </div>

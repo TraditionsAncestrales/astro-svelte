@@ -3,9 +3,19 @@
 
 [build]
   command = 'npx pnpm install --store=node_modules/.pnpm-store && npm run build'
+  functions = "netlify/functions"
   publish = 'dist'
+
+[functions]
+  node_bundler = "esbuild"
 
 [dev]
   command = "pnpm dev"
   framework = "astro"
   targetPort = 3000
+    
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true

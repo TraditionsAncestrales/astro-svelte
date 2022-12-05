@@ -10,9 +10,8 @@
   node_bundler = "esbuild"
 
 [dev]
-  command = "pnpm dev"
+  command = "pnpm astro:dev"
   framework = "astro"
-  targetPort = 3000
     
 [[redirects]]
   from = "/api/*"

@@ -3,10 +3,7 @@ import sanity from 'astro-sanity';
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
-import solidJs from '@astrojs/solid-js';
-
-// https://astro.build/config
-//import netlify from '@astrojs/netlify/functions';
+import svelte from '@astrojs/svelte';
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,8 +19,6 @@ export default defineConfig({
       apiVersion: '2022-10-28',
       useCdn: true,
     }),
-    solidJs(),
+    svelte(),
   ],
-  //output: 'server',
-  //adapter: netlify(),
 });

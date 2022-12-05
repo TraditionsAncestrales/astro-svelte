@@ -3,8 +3,9 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {sourceType: 'module'},
   env: {browser: true, es6: true, node: true},
-  plugins: ['@typescript-eslint', 'promise', 'unicorn'],
+  plugins: ['svelte3','@typescript-eslint', 'promise', 'unicorn'],
   ignorePatterns: ['*.cjs'],
+  overrides: [{files: ['*.svelte'], processor: 'svelte3/svelte3'}],
   overrides: [
     {
       files: ['*.astro'],
@@ -42,4 +43,5 @@ module.exports = {
     'unicorn/no-useless-spread': 'off',
     'unicorn/prevent-abbreviations': 'off',
   },
+  settings: {'svelte3/typescript': require('typescript')},
 };

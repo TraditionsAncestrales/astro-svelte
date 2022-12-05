@@ -56,6 +56,13 @@ export const zUiFeaturesData = z.object({
 });
 export const zUiFeaturesP = zUiFeaturesData.merge(zComponentStyles);
 
+// UI IMG ==================================================================================================================================
+export const zUiImgData = z.object({
+  image: zImage,
+  loading: z.enum(['eager', 'lazy']).optional()
+});
+export const zUiImgP = zUiImgData.merge(zComponentStyles);
+
 // UI IMAGE ================================================================================================================================
 export const zUiImageData = z.object({
   border: z.number().optional(),

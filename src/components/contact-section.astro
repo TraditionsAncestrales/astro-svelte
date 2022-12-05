@@ -1,11 +1,11 @@
 ---
-import UiSection from "./ui-section.astro";
+import ContactForm from './contact-form.svelte';
+import UiSection from './ui-section.astro';
 
 // PROPS ===================================================================================================================================
 const {...rest} = Astro.props;
-
 ---
 
 <UiSection title="Me contacter" {...rest}>
-
+  <ContactForm client:visible />
 </UiSection>

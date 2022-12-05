@@ -1,11 +1,10 @@
 ---
 import type { z } from 'zod';
-import type { Image } from '~/data/schemas';
-import type { zComponentStyles } from '~/data/schemas.ui';
+import type { zUiImgP } from '~/data/schemas.ui';
 import { getImageProps } from '~/data/ui';
 
 // PROPS ===================================================================================================================================
-const {image} = Astro.props;
+const {image, loading = 'lazy'} = Astro.props;
 
 // VARS ====================================================================================================================================
 const props = getImageProps(image);
@@ -14,7 +13,7 @@ const props = getImageProps(image);
 const {class: cEl = '', 'class:list': classes = []} = Astro.props;
 
 // TYPES ===================================================================================================================================
-export type Props = {image: Image} & z.infer<typeof zComponentStyles>;
+export type Props = z.infer<typeof zUiImgP>;
 ---
 
-<img loading="lazy" alt='' class:list={['h-auto', cEl, ...classes]} {...props} />
+<img loading={loading} alt="" class:list={['h-auto', cEl, ...classes]} {...props} />

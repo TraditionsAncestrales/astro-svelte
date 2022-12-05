@@ -6,7 +6,7 @@ const {...rest} = Astro.props;
 ---
 
 <UiSection title="Me contacter" {...rest}>
-  <form name="contact" method="POST" data-netlify="true" class="mb-12">
+  <form id="form" name="contact" method="POST" data-netlify="true" class="mb-12">
     <p>
       <label>Your Name: <input type="text" name="name" /></label>
     </p>
@@ -25,6 +25,7 @@ const {...rest} = Astro.props;
 <script>
   const handleSubmit = async (event: Event) => {
     event.preventDefault();
+
     const myForm = event.target as HTMLFormElement;
 
     try {
@@ -33,11 +34,10 @@ const {...rest} = Astro.props;
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: new URLSearchParams(new FormData(myForm)).toString(),
       });
-			console.log(res);
+      console.log(res);
     } catch (error) {
-			console.error(error);
-		}
+      console.error(error);
+    }
   };
-
-  document.querySelector('form')!.addEventListener('submit', handleSubmit);
+  document.querySelector('#form')!.addEventListener('submit', handleSubmit);
 </script>

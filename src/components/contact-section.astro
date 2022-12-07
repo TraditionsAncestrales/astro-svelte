@@ -1,4 +1,5 @@
 ---
+import ContactForm from './contact-form.svelte';
 import UiSection from './ui-section.astro';
 
 // PROPS ===================================================================================================================================
@@ -6,38 +7,5 @@ const {...rest} = Astro.props;
 ---
 
 <UiSection title="Me contacter" {...rest}>
-  <form id="form" name="contact" method="POST" data-netlify="true" class="mb-12">
-    <p>
-      <label>Your Name: <input type="text" name="name" /></label>
-    </p>
-    <p>
-      <label>Your Email: <input type="email" name="email" /></label>
-    </p>
-    <p>
-      <label>Message: <textarea name="message"></textarea></label>
-    </p>
-    <p>
-      <button type="submit">Envoyer</button>
-    </p>
-  </form>
+  <ContactForm client:visible />
 </UiSection>
-
-<script>
-  const handleSubmit = async (event: Event) => {
-    event.preventDefault();
-
-    const myForm = event.target as HTMLFormElement;
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams(new FormData(myForm)).toString(),
-      });
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  document.querySelector('#form')!.addEventListener('submit', handleSubmit);
-</script>

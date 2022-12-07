@@ -22,6 +22,18 @@ export const zFormControlData = z.object({
 });
 export const zFormControlP = zFormControlData.merge(zComponentStyles);
 
+// FORM AREA ===============================================================================================================================
+export const zFormAreaData = zFormControlData.extend({});
+export const zFormAreaP = zFormAreaData.merge(zComponentStyles);
+
+// FORM EMAIL ==============================================================================================================================
+export const zFormEmailData = zFormControlData.extend({});
+export const zFormEmailP = zFormEmailData.merge(zComponentStyles);
+
+// FORM TEXT ===============================================================================================================================
+export const zFormTextData = zFormControlData.extend({});
+export const zFormTextP = zFormTextData.merge(zComponentStyles);
+
 // THE FOOTER ==============================================================================================================================
 export const zTheFooterData = zConfig.pick({city: true, email: true, fb: true, instagram: true, phone: true, street: true, zipcode: true});
 export const zTheFooterP = zTheFooterData.merge(zComponentStyles);

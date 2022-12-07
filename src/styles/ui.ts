@@ -46,3 +46,17 @@ export const BTN = cva('font-medium rounded px-5 py-2.5 focus:ring-4 focus:outli
   },
   defaultVariants: {intent: 'primary'},
 });
+
+export const INPUT = cva(
+  `block w-full p-2.5 text-sm border border-secondary/30 
+  focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 
+  invalid:border-red-500 placeholder-shown:invalid:border-secondary/30 invalid:text-red-600
+  focus:invalid:border-red-500 focus:invalid:ring-red-500`,
+  {
+    variants: {
+      iconed: {
+        true: 'pl-8',
+      },
+    },
+  }
+);

@@ -1,9 +1,8 @@
 <FormControl {errors} {label} {name} class={cEl}>
-  <textarea {name} required placeholder={label ?? name} class="{INPUT()} {cInput}" />
+  <textarea {name} required placeholder={label ?? name} class="{'INPUT()'} {cInput}" />
 </FormControl>
 
 <script lang="ts">
-  import {INPUT} from '~/styles/ui';
   import FormControl from './form-control.svelte';
 
   // PROPS =================================================================================================================================

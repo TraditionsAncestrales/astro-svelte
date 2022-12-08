@@ -6,10 +6,6 @@ export const fill = <V>(value: V) => {
   return <K extends string = string>(...keys: K[]): Record<K, V> => Object.fromEntries(keys.map((key) => [key, value])) as Record<K, V>;
 };
 
-// IS EMAIL ================================================================================================================================
-const matcher = /^[\w!#$%&'*+./=?^`{|}~-]+@[\dA-Za-z](?:[\dA-Za-z-]{0,61}[\dA-Za-z])?(?:\.[\dA-Za-z](?:[\dA-Za-z-]{0,61}[\dA-Za-z])?)*$/;
-export const isEmail = (value: string) => value.length <= 320 && matcher.test(value);
-
 // PARSERS =================================================================================================================================
 export const parseFormDataValue = <S extends string>(v?: S | 'undefined' | ''): S | undefined =>
   v === 'undefined' || v === '' || !v ? undefined : v;

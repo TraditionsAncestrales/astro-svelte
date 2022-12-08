@@ -10,7 +10,7 @@
 
 <script lang="ts">
   import {createForm} from 'felte';
-  import {isEmail} from '~/data/utils';
+  import {isEmail} from '~/data/svelte.utils';
   import FormArea from './form-area.svelte';
   import FormEmail from './form-email.svelte';
   import FormSubmit from './form-submit.svelte';

@@ -1,15 +1,6 @@
-<form
-  use:form
-  name="contact"
-  action={import.meta.env.DEV ? "/api/contact" : ''}
-  method="POST"
-  enctype="application/x-www-form-urlencoded"
-  netlify
-  netlify-honeypot="bot-field"
-  class="mb-4 flex flex-col {cEl}"
->
-  <input type="hidden" name="form-name" value="contact" />
-  <input name="bot-field" class="hidden" />
+<form use:form action={import.meta.env.DEV ? '/api/contact' : '/'} {...props} class="mb-4 flex flex-col {cEl}">
+  <input type="hidden" name="form-name" value={props.name} />
+  <input name={props['netlify-honeypot']} class="hidden" />
   <FormText name="fullname" label="Votre nom" form={formState} />
   <FormEmail name="email" label="Votre courriel" form={formState} />
   <FormArea name="message" label="Votre message" form={formState} />
@@ -33,6 +24,9 @@
 
   // VARS ==================================================================================================================================
   let alert: {isSuccess: boolean; message: string} | undefined;
+
+  const props = {method: 'POST', name: 'contact', netlify: true, 'netlify-honeypot': 'spammy'};
+
   const {form, reset, ...formState} = createForm<{email: string; fullname: string; message: string}>({
     validate: ({email, fullname, message}) => ({
       email: !email ? 'Ce champ est requis.' : !isEmail(email) ? "Le courriel n'est pas valide." : null,

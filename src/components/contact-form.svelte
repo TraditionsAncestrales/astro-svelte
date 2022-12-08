@@ -6,12 +6,13 @@
   <FormEmail name="email" label="Votre courriel" errors={$errors.email ?? []} touched={$touched.email} />
   <FormArea name="message" label="Votre message" errors={$errors.message ?? []} touched={$touched.message} />
 
-  <button type="submit" disabled={$isSubmitting} class={'BTN()'}>{$isSubmitting ? 'Envoi en cours...' : 'Envoyer'}</button>
+  <button type="submit" disabled={$isSubmitting} class={BTN()}>{$isSubmitting ? 'Envoi en cours...' : 'Envoyer'}</button>
 </form>
 
 <script lang="ts">
   import {createForm} from 'felte';
   import isEmail from 'is-email';
+  import {BTN} from '~/styles/ui';
   import FormArea from './form-area.svelte';
   import FormEmail from './form-email.svelte';
   import FormText from './form-text.svelte';

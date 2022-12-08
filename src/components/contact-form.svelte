@@ -1,5 +1,15 @@
-<form use:form name="contact" action="/api/contact" method="POST" data-netlify="true" class="mb-4 flex flex-col {cEl}">
+<form
+  use:form
+  name="contact"
+  action="/api/contact"
+  method="POST"
+  enctype="application/x-www-form-urlencoded"
+  netlify
+  netlify-honeypot="bot-field"
+  class="mb-4 flex flex-col {cEl}"
+>
   <input type="hidden" name="form-name" value="contact" />
+  <input name="bot-field" class="hidden" />
   <FormText name="fullname" label="Votre nom" form={formState} />
   <FormEmail name="email" label="Votre courriel" form={formState} />
   <FormArea name="message" label="Votre message" form={formState} />
@@ -23,7 +33,7 @@
 
   // VARS ==================================================================================================================================
   let alert: {isSuccess: boolean; message: string} | undefined;
-  const {form, reset, ...formState} = createForm<{email: string; fullname: string; 'form-name': string; message: string}>({
+  const {form, reset, ...formState} = createForm<{email: string; fullname: string; message: string}>({
     validate: ({email, fullname, message}) => ({
       email: !email ? 'Ce champ est requis.' : !isEmail(email) ? "Le courriel n'est pas valide." : null,
       fullname: fullname ? null : 'Ce champ est requis.',

@@ -129,3 +129,6 @@ export const zTrainingItemsP = zTrainingItemsData.merge(zUiSectionP);
 // WORKSHOP ITEMS ==========================================================================================================================
 export const zWorkshopItemsData = z.object({items: zWorkshopItem.array()});
 export const zWorkshopItemsP = zWorkshopItemsData.merge(zUiSectionP);
+
+// TYPES ===================================================================================================================================
+export type Intent = z.infer<typeof zIntent>;

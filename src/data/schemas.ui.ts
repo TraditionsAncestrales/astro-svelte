@@ -1,5 +1,6 @@
 import type {createForm} from 'felte';
 import {z} from 'zod';
+import {fillString} from './schema.utils';
 import {
   zArticleItem,
   zConfig,
@@ -13,7 +14,7 @@ import {
   zTrainingItem,
   zWorkshopItem
 } from './schemas';
-import {fill, fillString} from './utils';
+import {fill} from './utils';
 
 // CORE ====================================================================================================================================
 export const zClass = z.string().optional();

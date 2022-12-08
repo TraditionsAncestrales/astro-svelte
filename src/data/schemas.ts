@@ -1,6 +1,7 @@
 import {z} from 'zod';
+import {fillString} from './schema.utils';
 import {zSanityBlock, zSanityImage, zSanityReference} from './schemas.sanity';
-import {fill, fillString, parseFormDataValue} from './utils';
+import {fill, parseFormDataValue} from './utils';
 
 // ENUMS ===================================================================================================================================
 export const formTypes = ['fail', 'success', 'unnormalized', 'unsanitized'] as const;

@@ -1,12 +1,10 @@
 import {useSanityClient} from 'astro-sanity';
-import {z} from 'zod';
+import type {z} from 'zod';
 
 // FILL ====================================================================================================================================
 export const fill = <V>(value: V) => {
   return <K extends string = string>(...keys: K[]): Record<K, V> => Object.fromEntries(keys.map((key) => [key, value])) as Record<K, V>;
 };
-
-export const fillString = fill(z.string());
 
 // IS EMAIL ================================================================================================================================
 const matcher = /^[\w!#$%&'*+./=?^`{|}~-]+@[\dA-Za-z](?:[\dA-Za-z-]{0,61}[\dA-Za-z])?(?:\.[\dA-Za-z](?:[\dA-Za-z-]{0,61}[\dA-Za-z])?)*$/;
@@ -24,11 +22,11 @@ export const procedure = <I extends unknown[] = [], O = unknown>(name: string, {
     try {
       if (debug) console.debug(`${name} - query:`, query);
       if (debug) console.debug(`${name} - args:`, args);
-      const queryParams = (input ?? z.any()).parse(args);
+      const queryParams = input ? input.parse(args) : args;
       if (debug) console.debug(`${name} - params:`, queryParams);
       const raw = await useSanityClient().fetch(query, queryParams);
       if (debug) console.debug(`${name} - raw:`, raw);
-      const data = (output ?? z.any()).parse(raw);
+      const data = output ? output.parse(raw) : raw;
       if (debug) console.debug(`${name} - data:`, data);
       return data;
     } catch (error) {

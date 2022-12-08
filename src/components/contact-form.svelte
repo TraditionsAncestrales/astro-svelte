@@ -1,7 +1,7 @@
 <form
   use:form
   name="contact"
-  action="/api/contact"
+  action={import.meta.env.DEV ? "/api/contact" : ''}
   method="POST"
   enctype="application/x-www-form-urlencoded"
   netlify

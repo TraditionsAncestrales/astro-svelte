@@ -44,8 +44,11 @@ export const BTN = cva(
   {
     variants: {
       intent: {
+        dark: [text('white'), btnIntent('dark')],
+        light: [text('dark'), btnIntent('light')],
         primary: [text('white'), btnIntent('primary')],
         secondary: [text('white'), btnIntent('secondary')],
+        white: [text('dark'), btnIntent('white')],
       },
     },
     defaultVariants: {intent: 'primary'},

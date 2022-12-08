@@ -1,11 +1,12 @@
-<button type="submit" {disabled} class="{BTN()} {cEl}">{disabled ? 'Envoi en cours...' : 'Envoyer'}</button>
+<button type="submit" {disabled} class="{BTN({intent})} {cEl}">{disabled ? 'Envoi en cours...' : 'Envoyer'}</button>
 
 <script lang="ts">
-  import type {FormControlP} from '~/schemas/ui';
+  import type {FormSubmitP} from '~/schemas/ui';
   import {BTN} from '~/styles/ui';
 
   // PROPS =================================================================================================================================
-  export let form: FormControlP['form'];
+  export let form: FormSubmitP['form'];
+  export let intent: FormSubmitP['intent'] = 'primary';
 
   // STYLES ================================================================================================================================
   let cEl = '';

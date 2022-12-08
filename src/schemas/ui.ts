@@ -28,24 +28,30 @@ export const zComponentStyles = z.object({
   'class:list': z.any().optional(),
 });
 
+export const zSvelteComponentStyles = zComponentStyles.omit({'class:list': true});
+
 // FORM CONTROL ============================================================================================================================
 export const zFormControlData = z.object({
-  label: z.string().optional(),
+  ...fill(z.string().optional())('label', 'placeholder'),
   name: z.string(),
 });
-export const zFormControlP = zFormControlData.merge(zComponentStyles.omit({'class:list': true}));
+export const zFormControlP = zFormControlData.merge(zSvelteComponentStyles);
 
 // FORM AREA ===============================================================================================================================
 export const zFormAreaData = zFormControlData.extend({});
-export const zFormAreaP = zFormAreaData.merge(zComponentStyles);
+export const zFormAreaP = zFormAreaData.merge(zSvelteComponentStyles);
 
 // FORM EMAIL ==============================================================================================================================
 export const zFormEmailData = zFormControlData.extend({});
-export const zFormEmailP = zFormEmailData.merge(zComponentStyles);
+export const zFormEmailP = zFormEmailData.merge(zSvelteComponentStyles);
+
+// FORM SUBMIT =============================================================================================================================
+export const zFormSubmitData = zFormControlData.extend({intent: zIntent});
+export const zFormSubmitP = zFormSubmitData.merge(zSvelteComponentStyles);
 
 // FORM TEXT ===============================================================================================================================
 export const zFormTextData = zFormControlData.extend({});
-export const zFormTextP = zFormTextData.merge(zComponentStyles);
+export const zFormTextP = zFormTextData.merge(zSvelteComponentStyles);
 
 // THE FOOTER ==============================================================================================================================
 export const zTheFooterData = zConfig.pick({city: true, email: true, fb: true, instagram: true, phone: true, street: true, zipcode: true});
@@ -144,7 +150,9 @@ export const zWorkshopItemsData = z.object({items: zWorkshopItem.array()});
 export const zWorkshopItemsP = zWorkshopItemsData.merge(zUiSectionP);
 
 // TYPES ===================================================================================================================================
-export type FormControlP = z.infer<typeof zFormControlP> & {
+export type FormProp = {
   form: Pick<ReturnType<typeof createForm>, 'errors' | 'isSubmitting' | 'isValid' | 'touched'>;
 };
+export type FormControlP = z.infer<typeof zFormControlP> & FormProp;
+export type FormSubmitP = z.infer<typeof zFormSubmitP> & FormProp;
 export type Intent = z.infer<typeof zIntent>;

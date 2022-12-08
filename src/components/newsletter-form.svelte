@@ -1,9 +1,9 @@
-<form use:form name="newsletter" action="/api/newsletter" method="POST" class="mb-4 flex flex-col {cEl}">
-  <FormEmail name="email" label="Votre courriel" form={formState} />
-  <div class:invisible={!alert} class="mb-2 {alert?.isSuccess ? 'bg-emerald-500' : 'bg-red-500'} text-white text-center p-2">
+<form use:form name="newsletter" action="/api/newsletter" method="POST" class="flex items-start gap-4 {cEl}">
+  <FormEmail name="email" placeholder="Votre courriel" form={formState} class="max-w-sm" />
+  <!-- <div class:invisible={!alert} class="mb-2 {alert?.isSuccess ? 'bg-emerald-500' : 'bg-red-500'} text-white text-center p-2">
     {alert?.message}
-  </div>
-  <FormSubmit form={formState} class="self-end" />
+  </div> -->
+  <FormSubmit form={formState} intent="secondary" />
 </form>
 
 <script lang="ts">
@@ -19,12 +19,8 @@
   // VARS ==================================================================================================================================
   let alert: {isSuccess: boolean; message: string} | undefined;
 
-  const {form, reset, ...formState} = createForm<{email: string; fullname: string; message: string}>({
-    validate: ({email, fullname, message}) => ({
-      email: !email ? 'Ce champ est requis.' : !isEmail(email) ? "Le courriel n'est pas valide." : null,
-      fullname: fullname ? null : 'Ce champ est requis.',
-      message: message ? null : 'Ce champ est requis.',
-    }),
+  const {form, reset, ...formState} = createForm<{email: string}>({
+    validate: ({email}) => ({email: !email ? 'Ce champ est requis.' : !isEmail(email) ? "Le courriel n'est pas valide." : null}),
     onSuccess: () => handleResponse(),
     onError: () => handleResponse(false),
   });

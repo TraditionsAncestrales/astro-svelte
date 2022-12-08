@@ -9,9 +9,6 @@ const {...rest} = Astro.props;
 <UiSection title="Newsletter" {...rest}>
   <div class="w-full flex gap-12">
     <p class="max-w-lg">Pour recevoir chaque semaine mon bulletin, c'est simple, vous avez juste à saisir votre courriel :</p>
-    <NewsletterForm class="flex-1 flex items-center gap-4">
-      <!-- <FormEmail name="email" placeholder="Votre courriel" class="max-w-md" /> -->
-      <!-- <button type="submit" class:list={BTN({intent: 'secondary'})}>Je m'inscris</button> -->
-    </NewsletterForm>
+    <NewsletterForm client:visible class="flex-1" />
   </div>
 </UiSection>

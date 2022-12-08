@@ -1,5 +1,5 @@
 <FormControl {form} {label} {name} class={cEl}>
-  <input {name} type="email" required class="{INPUT({touched: $touched[name]})} {cInput}" />
+  <input {name} type="email" {placeholder} required class="{INPUT({touched: $touched[name]})} {cInput}" />
 </FormControl>
 
 <script lang="ts">
@@ -9,8 +9,9 @@
 
   // PROPS =================================================================================================================================
   export let form: FormControlP['form'];
-  export let label: FormControlP['label'];
+  export let label: FormControlP['label'] = undefined;
   export let name: FormControlP['name'];
+  export let placeholder: FormControlP['placeholder'] = undefined;
 
   // STYLES ================================================================================================================================
   let cEl = '';

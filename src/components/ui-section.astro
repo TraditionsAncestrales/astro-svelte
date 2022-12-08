@@ -28,7 +28,7 @@ export type Props = z.infer<typeof zUiSectionP>;
 ---
 
 {hasBorderTop && <Icon name="border" class:list={[...cBorder, '-mt-16']} />}
-<section class:list={['overflow-hidden', {'pt-4': hasBorderTop}, expanded ? 'py-12' : 'p-12', bg(intent), cEl, ...classes]}>
+<section class:list={['overflow-hidden', {'pt-4': hasBorderTop}, expanded ? 'py-12' : 'p-6 sm:p-12', bg(intent), cEl, ...classes]}>
   <div class:list={['flex items-start gap-8', expanded ? 'w-full' : 'container mx-auto']}>
     {image && <UiImage image={image} class:list={cImage} border={imageBorder} right={imageRight} cImg={cImageImg} />}
     <div class="flex-1 max-w-full flex flex-col items-start">

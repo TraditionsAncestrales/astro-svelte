@@ -1,15 +1,16 @@
-<FormControl {errors} {label} {name} class={cEl}>
-  <input {name} required placeholder={label ?? name} class="{'INPUT()'} {cInput}" />
+<FormControl {form} {label} {name} class={cEl}>
+  <input {name} required class="{INPUT({touched: $touched[name]})} {cInput}" />
 </FormControl>
 
 <script lang="ts">
+  import type {FormControlP} from '~/data/schemas.ui';
+  import {INPUT} from '~/styles/ui';
   import FormControl from './form-control.svelte';
 
   // PROPS =================================================================================================================================
-  export let errors: string[];
-  export let label: string;
-  export let name: string;
-  export let touched: boolean;
+  export let form: FormControlP['form'];
+  export let label: FormControlP['label'];
+  export let name: FormControlP['name'];
 
   // STYLES ================================================================================================================================
   let cEl = '';
@@ -17,6 +18,5 @@
   export let cInput = '';
 
   // VARS ==================================================================================================================================
-
-  // TYPES =================================================================================================================================
+  $: ({touched} = form);
 </script>

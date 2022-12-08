@@ -1,6 +1,5 @@
 ---
 import { BTN } from '~/styles/ui';
-import FormEmail from './form-email.svelte';
 import UiSection from './ui-section.astro';
 
 // PROPS =================================================================================================================================
@@ -11,7 +10,7 @@ const {...rest} = Astro.props;
   <div class="w-full flex gap-12">
     <p class="max-w-lg">Pour recevoir chaque semaine mon bulletin, c'est simple, vous avez juste à saisir votre courriel :</p>
     <form method="POST" action="/api/newsletter" class="flex-1 flex items-center gap-4">
-      <FormEmail name="email" placeholder="Votre courriel" class="max-w-md" />
+      <!-- <FormEmail name="email" placeholder="Votre courriel" class="max-w-md" /> -->
       <button type="submit" class:list={BTN({intent: 'secondary'})}>Je m'inscris</button>
     </form>
   </div>

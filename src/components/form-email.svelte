@@ -1,18 +1,16 @@
-<FormControl {errors} {label} {name} class={cEl}>
-  <div class="relative w-full flex items-center">
-    <!-- <Sprite name="teenyicons:envelope-solid" class="absolute z-10 left-2 w-5 h-5 text-secondary/30" /> -->
-    <input {name} type="email" required placeholder={label ?? name} class="{'INPUT({iconed: true})'} {cInput}" />
-  </div>
+<FormControl {form} {label} {name} class={cEl}>
+  <input {name} type="email" required class="{INPUT({touched: $touched[name]})} {cInput}" />
 </FormControl>
 
 <script lang="ts">
+  import type {FormControlP} from '~/data/schemas.ui';
+  import {INPUT} from '~/styles/ui';
   import FormControl from './form-control.svelte';
 
   // PROPS =================================================================================================================================
-  export let errors: string[];
-  export let label: string;
-  export let name: string;
-  export let touched: boolean;
+  export let form: FormControlP['form'];
+  export let label: FormControlP['label'];
+  export let name: FormControlP['name'];
 
   // STYLES ================================================================================================================================
   let cEl = '';
@@ -20,6 +18,5 @@
   export let cInput = '';
 
   // VARS ==================================================================================================================================
-
-  // TYPES =================================================================================================================================
+  $: ({touched} = form);
 </script>

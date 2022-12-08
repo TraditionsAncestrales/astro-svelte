@@ -1,5 +1,18 @@
+import type {createForm} from 'felte';
 import {z} from 'zod';
-import {zArticleItem, zConfig, zConsultationItem, zImage, zKnowledge, zMenu, zPageType, zProductItem, zTestimony, zTrainingItem, zWorkshopItem} from './schemas';
+import {
+  zArticleItem,
+  zConfig,
+  zConsultationItem,
+  zImage,
+  zKnowledge,
+  zMenu,
+  zPageType,
+  zProductItem,
+  zTestimony,
+  zTrainingItem,
+  zWorkshopItem
+} from './schemas';
 import {fill, fillString} from './utils';
 
 // CORE ====================================================================================================================================
@@ -16,11 +29,10 @@ export const zComponentStyles = z.object({
 
 // FORM CONTROL ============================================================================================================================
 export const zFormControlData = z.object({
-  errors: z.string().array(),
   label: z.string().optional(),
   name: z.string(),
 });
-export const zFormControlP = zFormControlData.merge(zComponentStyles);
+export const zFormControlP = zFormControlData.merge(zComponentStyles.omit({'class:list': true}));
 
 // FORM AREA ===============================================================================================================================
 export const zFormAreaData = zFormControlData.extend({});
@@ -71,7 +83,7 @@ export const zUiFeaturesP = zUiFeaturesData.merge(zComponentStyles);
 // UI IMG ==================================================================================================================================
 export const zUiImgData = z.object({
   image: zImage,
-  loading: z.enum(['eager', 'lazy']).optional()
+  loading: z.enum(['eager', 'lazy']).optional(),
 });
 export const zUiImgP = zUiImgData.merge(zComponentStyles);
 
@@ -131,4 +143,7 @@ export const zWorkshopItemsData = z.object({items: zWorkshopItem.array()});
 export const zWorkshopItemsP = zWorkshopItemsData.merge(zUiSectionP);
 
 // TYPES ===================================================================================================================================
+export type FormControlP = z.infer<typeof zFormControlP> & {
+  form: Pick<ReturnType<typeof createForm>, 'errors' | 'isSubmitting' | 'isValid' | 'touched'>;
+};
 export type Intent = z.infer<typeof zIntent>;

@@ -1,22 +1,17 @@
-<div class="mb-2 pb-6 w-full relative {cEl}">
-  {#if label}<label for={name}>{label}</label>{/if}
-  <slot />
-  <label for={name} class="absolute left-1 bottom-0 text-sm text-red-600">{error}</label>
-</div>
+<button type="submit" {disabled} class="{BTN()} {cEl}">{disabled ? 'Envoi en cours...' : 'Envoyer'}</button>
 
 <script lang="ts">
   import type {FormControlP} from '~/data/schemas.ui';
+  import {BTN} from '~/styles/ui';
 
   // PROPS =================================================================================================================================
   export let form: FormControlP['form'];
-  export let label: FormControlP['label'];
-  export let name: FormControlP['name'];
 
   // STYLES ================================================================================================================================
   let cEl = '';
   export {cEl as class};
 
   // VARS ==================================================================================================================================
-  $: ({errors, isSubmitting} = form);
-  $: error = $errors[name]?.[0] ?? '';
+  $: ({isSubmitting, isValid} = form);
+  $: disabled = $isSubmitting && $isValid;
 </script>

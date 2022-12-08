@@ -4,11 +4,11 @@ import ConsultationItems from '~/components/consultation-items.astro';
 import EventItems from '~/components/event-items.astro';
 import TrainingItems from '~/components/training-items.astro';
 import WorkshopItems from '~/components/workshop-items.astro';
-import { getKnowledgeData } from '~/data/api';
 import Layout from '~/layouts/layout.astro';
+import { getKnowledgeData } from '~/server/api';
 
 // PATHS ===================================================================================================================================
-export { getKnowledgePaths as getStaticPaths } from '~/data/api';
+export { getKnowledgePaths as getStaticPaths } from '~/server/api';
 
 // DATA ====================================================================================================================================
 const {knowledge} = Astro.params;

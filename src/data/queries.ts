@@ -1,4 +1,4 @@
-import {PageType, URL_DIRS} from './schemas';
+import {PageType, URL_DIRS} from '~/schemas';
 
 // CORE ====================================================================================================================================
 export const qSlug = `slug.current`;

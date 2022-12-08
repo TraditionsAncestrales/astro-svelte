@@ -1,5 +1,5 @@
 import {createImageBuilder, useSanityClient} from 'astro-sanity';
-import type {Image} from './schemas';
+import type {Image} from '~/schemas';
 
 const imageBuilder = createImageBuilder(useSanityClient());
 

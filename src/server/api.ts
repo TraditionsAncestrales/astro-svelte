@@ -1,6 +1,6 @@
-import {qEntries, qEntry, qEntryProps, qItemProps, qLayout, qPaths, qRefs, qSlugProp} from './queries';
-import {zArticle, zArticleItem, zConsultation, zConsultationItem, zEvent, zProductItem, zTestimony, zTraining, zTrainingItem, zWorkshop, zWorkshopItem} from './schemas';
-import {zGeneralKnowledgeInput, zKnowledgePaths, zKnowledgeSlugInput, zOutput, zPaths, zSlugInput} from './schemas.api';
+import {qEntries, qEntry, qEntryProps, qItemProps, qLayout, qPaths, qRefs, qSlugProp} from '~/data/queries';
+import {zArticle, zArticleItem, zConsultation, zConsultationItem, zEvent, zProductItem, zTestimony, zTraining, zTrainingItem, zWorkshop, zWorkshopItem} from '~/schemas';
+import {zGeneralKnowledgeInput, zKnowledgePaths, zKnowledgeSlugInput, zOutput, zPaths, zSlugInput} from '~/schemas/api';
 import {procedure} from './utils';
 
 // ARTICLE ===============================================================================================================================

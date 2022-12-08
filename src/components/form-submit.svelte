@@ -1,7 +1,7 @@
 <button type="submit" {disabled} class="{BTN()} {cEl}">{disabled ? 'Envoi en cours...' : 'Envoyer'}</button>
 
 <script lang="ts">
-  import type {FormControlP} from '~/data/schemas.ui';
+  import type {FormControlP} from '~/schemas/ui';
   import {BTN} from '~/styles/ui';
 
   // PROPS =================================================================================================================================

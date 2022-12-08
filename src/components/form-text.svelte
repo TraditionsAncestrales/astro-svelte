@@ -3,7 +3,7 @@
 </FormControl>
 
 <script lang="ts">
-  import type {FormControlP} from '~/data/schemas.ui';
+  import type {FormControlP} from '~/schemas/ui';
   import {INPUT} from '~/styles/ui';
   import FormControl from './form-control.svelte';
 

@@ -1,7 +1,7 @@
 ---
 import type { z } from 'zod';
-import type { zUiImgP } from '~/data/schemas.ui';
-import { getImageProps } from '~/data/ui';
+import type { zUiImgP } from '~/schemas/ui';
+import { getImageProps } from '~/server/ui';
 
 // PROPS ===================================================================================================================================
 const {image, loading = 'lazy'} = Astro.props;

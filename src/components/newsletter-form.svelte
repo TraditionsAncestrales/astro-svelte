@@ -1,9 +1,5 @@
-<form use:form action={import.meta.env.DEV ? '/api/contact' : '/'} {...props} class="mb-4 flex flex-col {cEl}">
-  <input type="hidden" name="form-name" value={props.name} />
-  <input name={props['netlify-honeypot']} class="hidden" />
-  <FormText name="fullname" label="Votre nom" form={formState} />
+<form use:form name="newsletter" action="/api/newsletter" method="POST" class="mb-4 flex flex-col {cEl}">
   <FormEmail name="email" label="Votre courriel" form={formState} />
-  <FormArea name="message" label="Votre message" form={formState} />
   <div class:invisible={!alert} class="mb-2 {alert?.isSuccess ? 'bg-emerald-500' : 'bg-red-500'} text-white text-center p-2">
     {alert?.message}
   </div>
@@ -13,10 +9,8 @@
 <script lang="ts">
   import {createForm} from 'felte';
   import {isEmail} from '~/data/utils';
-  import FormArea from './form-area.svelte';
   import FormEmail from './form-email.svelte';
   import FormSubmit from './form-submit.svelte';
-  import FormText from './form-text.svelte';
 
   // STYLES ================================================================================================================================
   let cEl = '';
@@ -24,8 +18,6 @@
 
   // VARS ==================================================================================================================================
   let alert: {isSuccess: boolean; message: string} | undefined;
-
-  const props = {method: 'POST', name: 'contact', netlify: true, 'netlify-honeypot': 'spammy'};
 
   const {form, reset, ...formState} = createForm<{email: string; fullname: string; message: string}>({
     validate: ({email, fullname, message}) => ({

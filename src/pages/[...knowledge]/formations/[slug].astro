@@ -2,11 +2,11 @@
 import UiSection from '~/components/ui-section.astro';
 import UiText from '~/components/ui-text.astro';
 import UiTitle from '~/components/ui-title.astro';
-import { getTrainingData } from '~/data/api';
 import Layout from '~/layouts/layout.astro';
+import { getTrainingData } from '~/server/api';
 
 // PATHS ===================================================================================================================================
-export { getTrainingPaths as getStaticPaths } from '~/data/api';
+export { getTrainingPaths as getStaticPaths } from '~/server/api';
 
 // DATA ====================================================================================================================================
 const {slug} = Astro.params;

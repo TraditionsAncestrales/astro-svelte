@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {zLayoutData} from "./schemas.ui";
+import {zLayoutData} from "./ui";
 
 // PATHS ===================================================================================================================================
 export const zPaths = z.object({params: z.object({slug: z.string(), knowledge: z.string().optional()})}).array();

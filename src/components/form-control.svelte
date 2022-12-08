@@ -5,7 +5,7 @@
 </div>
 
 <script lang="ts">
-  import type {FormControlP} from '~/data/schemas.ui';
+  import type {FormControlP} from '~/schemas/ui';
 
   // PROPS =================================================================================================================================
   export let form: FormControlP['form'];

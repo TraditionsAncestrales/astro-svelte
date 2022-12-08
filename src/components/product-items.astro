@@ -1,9 +1,10 @@
 ---
 import type { z } from 'zod';
-import type { zProductItemsP } from '~/data/schemas.ui';
+import type { zProductItemsP } from '~/schemas/ui';
 import { BTN } from '~/styles/ui';
 import UiCarousel from './ui-carousel.astro';
 import UiFeatures from './ui-features.astro';
+import UiImg from './ui-img.astro';
 import UiSection from './ui-section.astro';
 import UiText from './ui-text.astro';
 
@@ -25,7 +26,7 @@ export type Props = z.infer<typeof zProductItemsP>;
       <UiCarousel class="w-full">
         {items.map(({excerpt, image, price, title, uri}) => (
           <li class="splide__slide shadow-md bg-white mb-2 flex flex-col">
-            <img src={image.url} alt="" class="flex-none aspect-[3/2] object-cover" />
+            <UiImg image={image} class="flex-none aspect-[3/2] object-cover" />
             <div class="flex-1 flex flex-col px-8 py-4">
               <h4 class="mb-4 font-heading text-2xl first-letter:text-primary first-letter:text-4xl">{title}</h4>
               <UiFeatures items={[{key: 'Tarif', value: price}]} intent="white" class="mb-4" />

@@ -1,5 +1,5 @@
 ---
-import { BTN } from '~/styles/ui';
+import NewsletterForm from './newsletter-form.svelte';
 import UiSection from './ui-section.astro';
 
 // PROPS =================================================================================================================================
@@ -9,9 +9,9 @@ const {...rest} = Astro.props;
 <UiSection title="Newsletter" {...rest}>
   <div class="w-full flex gap-12">
     <p class="max-w-lg">Pour recevoir chaque semaine mon bulletin, c'est simple, vous avez juste à saisir votre courriel :</p>
-    <form method="POST" action="/api/newsletter" class="flex-1 flex items-center gap-4">
+    <NewsletterForm class="flex-1 flex items-center gap-4">
       <!-- <FormEmail name="email" placeholder="Votre courriel" class="max-w-md" /> -->
-      <button type="submit" class:list={BTN({intent: 'secondary'})}>Je m'inscris</button>
-    </form>
+      <!-- <button type="submit" class:list={BTN({intent: 'secondary'})}>Je m'inscris</button> -->
+    </NewsletterForm>
   </div>
 </UiSection>

@@ -1,7 +1,7 @@
 ---
 import ProductItems from '~/components/product-items.astro';
-import { getShopData } from '~/data/api';
 import Layout from '~/layouts/layout.astro';
+import { getShopData } from '~/server/api';
 
 // DATA ====================================================================================================================================
 const data = await getShopData();

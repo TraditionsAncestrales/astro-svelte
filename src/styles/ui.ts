@@ -1,5 +1,5 @@
 import {cva} from 'class-variance-authority';
-import type {Intent} from '~/data/schemas.ui';
+import type {Intent} from '~/schemas/ui';
 
 // TYPES ===================================================================================================================================
 export const bg = (intent: Intent) =>

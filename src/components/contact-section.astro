@@ -9,13 +9,5 @@ const {...rest} = Astro.props;
 <UiSection title="Me contacter" class="relative" {...rest}>
   <ContactForm client:visible class="w-full max-w-xl" />
   <div class="absolute top-0 -bottom-16 right-0 w-1/2">
-    <iframe
-      title="map"
-      width="600"
-      height="450"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps/embed/v1/place?q=place_id:EjA0NyBSdWUgZGVzIEF2b2NhdGllcnMsIFNhaW50LUxldSA5NzQzNiwgUsOpdW5pb24iMBIuChQKEgmR_zSPSpeCIRHBeCjTpTDdVRAvKhQKEgn1bjGjSpeCIRE12G5tt19GRw&key=AIzaSyAHxbwn2WzKOvwnhlVTU5wATtFSicBPi-A"
-      class="absolute top-0 left-0 !w-full !h-full border-0"></iframe>
   </div>
 </UiSection>

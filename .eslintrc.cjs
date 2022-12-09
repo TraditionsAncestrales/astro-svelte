@@ -3,7 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {sourceType: 'module'},
   env: {browser: true, es6: true, node: true},
-  plugins: ['svelte3','@typescript-eslint', 'promise', 'unicorn'],
+  plugins: ['svelte3', '@typescript-eslint', 'promise', 'unicorn'],
   ignorePatterns: ['*.cjs'],
   overrides: [{files: ['*.svelte'], processor: 'svelte3/svelte3'}],
   overrides: [
@@ -38,6 +38,7 @@ module.exports = {
     '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
     'no-control-regex': 'off',
+    'no-empty': ['error', {allowEmptyCatch: true}],
     'unicorn/no-array-callback-reference': 'off',
     'unicorn/no-array-for-each': 'off',
     'unicorn/no-useless-spread': 'off',

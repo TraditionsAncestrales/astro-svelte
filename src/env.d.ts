@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly MAILCHIMP_API_KEY: string;
+  readonly MAILCHIMP_LIST_ID: string;
   readonly MAILCHIMP_SERVER: string;
 }
 

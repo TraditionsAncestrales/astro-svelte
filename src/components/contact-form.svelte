@@ -1,46 +1,36 @@
-<form use:form action={import.meta.env.DEV ? '/api/contact' : '/'} {...props} class="mb-4 flex flex-col {cEl}">
-  <input type="hidden" name="form-name" value={props.name} />
-  <input name={props['netlify-honeypot']} class="hidden" />
-  <FormText name="fullname" label="Votre nom" form={formState} />
-  <FormEmail name="email" label="Votre courriel" form={formState} />
-  <FormArea name="message" label="Votre message" form={formState} />
-  <div class:invisible={!alert} class="mb-2 {alert?.isSuccess ? 'bg-emerald-500' : 'bg-red-500'} text-white text-center p-2">
-    {alert?.message}
-  </div>
-  <FormSubmit form={formState} class="self-end" />
-</form>
+<UiForm
+  name="contact"
+  action={import.meta.env.DEV ? '/api/contact' : '/'}
+  netlify
+  {messages}
+  {validate}
+  cSubmit="self-end"
+  class="mb-4 flex flex-col {cEl}"
+>
+  <svelte:fragment slot="fields" let:form>
+    <FormText name="fullname" label="Votre nom" {form} />
+    <FormEmail name="email" label="Votre courriel" {form} />
+    <FormArea name="message" label="Votre message" {form} />
+  </svelte:fragment>
+</UiForm>
 
 <script lang="ts">
-  import {createForm} from 'felte';
   import {isEmail} from '~/data/utils';
   import FormArea from './form-area.svelte';
   import FormEmail from './form-email.svelte';
-  import FormSubmit from './form-submit.svelte';
   import FormText from './form-text.svelte';
+  import UiForm from './ui-form.svelte';
 
   // STYLES ================================================================================================================================
   let cEl = '';
   export {cEl as class};
 
   // VARS ==================================================================================================================================
-  let alert: {isSuccess: boolean; message: string} | undefined;
+  const messages = {200: 'Message envoyé avec succès !'};
 
-  const props = {method: 'POST', name: 'contact', netlify: true, 'netlify-honeypot': 'spammy'};
-
-  const {form, reset, ...formState} = createForm<{email: string; fullname: string; message: string}>({
-    validate: ({email, fullname, message}) => ({
-      email: !email ? 'Ce champ est requis.' : !isEmail(email) ? "Le courriel n'est pas valide." : null,
-      fullname: fullname ? null : 'Ce champ est requis.',
-      message: message ? null : 'Ce champ est requis.',
-    }),
-    onSuccess: () => handleResponse(),
-    onError: () => handleResponse(false),
+  const validate = ({email, fullname, message}: any) => ({
+    email: !email ? 'Ce champ est requis.' : !isEmail(email) ? "Le courriel n'est pas valide." : null,
+    fullname: fullname ? null : 'Ce champ est requis.',
+    message: message ? null : 'Ce champ est requis.',
   });
-
-  // METHODS ===============================================================================================================================
-  const handleResponse = (isSuccess = true) => {
-    reset();
-    alert = {isSuccess, message: isSuccess ? 'Message envoyé avec succès!' : 'Une erreur est survenue. Veuillez réessayer ultérieurement.'};
-    setTimeout(() => (alert = undefined), 2000);
-  };
 </script>

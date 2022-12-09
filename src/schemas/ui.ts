@@ -137,9 +137,9 @@ export const zKnowledgeItemsP = zKnowledgeItemsData.merge(zUiSectionP);
 export const zProductItemsData = z.object({items: zProductItem.array()});
 export const zProductItemsP = zProductItemsData.merge(zUiSectionP);
 
-// TESTIMONY ITEMS =========================================================================================================================
-export const zTestimonyItemsData = z.object({items: zTestimony.array()});
-export const ztestimonyItemsP = zTestimonyItemsData.merge(zUiSectionP);
+// TESTIMONY SECTION =======================================================================================================================
+export const zTestimonySectionData = z.object({items: zTestimony.array()});
+export const zTestimonySectionP = zTestimonySectionData.merge(zUiSectionP);
 
 // TRAINING ITEMS ==========================================================================================================================
 export const zTrainingItemsData = z.object({items: zTrainingItem.array()});

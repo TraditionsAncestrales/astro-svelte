@@ -1,7 +1,7 @@
 ---
 import ArticleItems from '~/components/article-items.astro';
 import EventItems from '~/components/event-items.astro';
-import TestimonyItems from '~/components/testimony-items.astro';
+import TestimonySection from '~/components/testimony-section.astro';
 import { getGeneralKnowledgeData } from '~/server/api';
 import Layout from '../layouts/layout.astro';
 
@@ -13,6 +13,6 @@ const {article, events, layout, testimonies} = data;
 <Layout {...layout}>
   <ArticleItems items={[article]} title="Bienvenue" border="top" cImage="max-w-xs" cImageImg="aspect-none" />
   <EventItems items={events} intent="light" />
-  <TestimonyItems items={testimonies} />
+  <TestimonySection items={testimonies} />
   <ArticleItems items={[layout.organization]} border="bottom" intent="primary" />
 </Layout>

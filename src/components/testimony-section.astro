@@ -1,0 +1,16 @@
+---
+import type { z } from 'zod';
+import type { zTestimonySectionP } from '~/schemas/ui';
+import TestimonyItems from './testimony-items.svelte';
+import UiSection from './ui-section.astro';
+
+// PROPS ===================================================================================================================================
+const {items} = Astro.props;
+
+// TYPES ===================================================================================================================================
+export type Props = z.infer<typeof zTestimonySectionP>;
+---
+
+<UiSection title="Témoignages" class="min-h-[30rem] bg-[url(/17.jpg)] bg-cover relative">
+  <TestimonyItems client:visible {items} />
+</UiSection>

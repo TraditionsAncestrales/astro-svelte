@@ -1,9 +1,9 @@
-<form use:form name="newsletter" action="/api/newsletter" method="POST" class="flex items-start gap-4 {cEl}">
+<form use:form name="newsletter" action="/api/newsletter" method="POST" class="sm:flex items-start gap-4 {cEl}">
   <FormEmail name="email" placeholder="Votre courriel" form={formState} class="max-w-sm" />
   <!-- <div class:invisible={!alert} class="mb-2 {alert?.isSuccess ? 'bg-emerald-500' : 'bg-red-500'} text-white text-center p-2">
     {alert?.message}
   </div> -->
-  <FormSubmit form={formState} intent="secondary" />
+  <FormSubmit form={formState} intent="secondary" class="w-full justify-center sm:w-auto" />
 </form>
 
 <script lang="ts">

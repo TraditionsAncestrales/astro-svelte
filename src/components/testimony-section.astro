@@ -11,6 +11,6 @@ const {items} = Astro.props;
 export type Props = z.infer<typeof zTestimonySectionP>;
 ---
 
-<UiSection title="Témoignages" class="min-h-[30rem] bg-[url(/17.jpg)] bg-cover relative">
-  <TestimonyItems client:visible {items} />
+<UiSection title="Témoignages" class="bg-[url(/17.jpg)] bg-cover">
+  <div class="h-[28rem] w-full relative"><TestimonyItems client:visible {items} /></div>
 </UiSection>

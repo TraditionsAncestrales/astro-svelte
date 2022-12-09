@@ -1,5 +1,5 @@
 ---
-import ContactForm from './contact-form.svelte';
+import ContactContent from './contact-content.svelte';
 import UiSection from './ui-section.astro';
 
 // PROPS ===================================================================================================================================
@@ -7,7 +7,5 @@ const {...rest} = Astro.props;
 ---
 
 <UiSection title="Me contacter" class="relative" {...rest}>
-  <ContactForm client:visible class="w-full max-w-xl" />
-  <div class="absolute top-0 -bottom-16 right-0 w-1/2">
-  </div>
+  <ContactContent client:visible class="w-full flex gap-8" />
 </UiSection>

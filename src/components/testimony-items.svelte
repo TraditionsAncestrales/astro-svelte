@@ -1,6 +1,6 @@
 {#key item}
-  <div in:fly={{y: -400, duration: 1000}} out:fly={{y: 400, duration: 1000}} class={cEl}>
-    <h5 class="text-3xl italic">{item.title}</h5>
+  <div in:fly={{y: 400, duration: 1000}} out:fly={{y: -400, duration: 1000}} class={cEl}>
+    <h5 class="text-3xl italic font-bold">{item.title}</h5>
     <p class="italic">{item.content}</p>
     <p class="font-bold">{item.author}</p>
   </div>

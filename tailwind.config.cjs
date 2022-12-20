@@ -4,10 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        dark: 'rgb(var(--color-dark) / <alpha-value>)',
-        light: 'rgb(var(--color-light) / <alpha-value>)',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
-        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        'primary-200': 'rgb(var(--color-primary-200) / <alpha-value>)',
+        'primary-300': 'rgb(var(--color-primary-300) / <alpha-value>)',
+        'primary-400': 'rgb(var(--color-primary-400) / <alpha-value>)',
       },
       data: {
         scrolled: 'scrolled=true',

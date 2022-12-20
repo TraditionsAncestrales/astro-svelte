@@ -11,8 +11,8 @@ const {article, events, layout, testimonies} = data;
 ---
 
 <Layout {...layout}>
-  <ArticleItems items={[article]} title="Bienvenue" border="top" cImage="max-w-xs" cImageImg="aspect-none" />
+  <ArticleItems items={[{...article, title: 'Bienvenue'}]} border="top" cAside="!max-w-sm" />
   <EventItems items={events} intent="light" />
-  <TestimonySection items={testimonies} />
+  <TestimonySection testimonies={testimonies} />
   <ArticleItems items={[layout.organization]} border="bottom" intent="primary" />
 </Layout>

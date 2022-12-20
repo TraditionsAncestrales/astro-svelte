@@ -8,19 +8,17 @@ const {image, subtitle, title} = Astro.props;
 
 // STYLES ==================================================================================================================================
 const {class: cEl = '', 'class:list': classes = []} = Astro.props;
+const cMask = `[mask-image:url(/splash.webp)] [mask-size:contain] [mask-position:center] [mask-repeat:no-repeat]`;
 
 // TYPES ===================================================================================================================================
 export type Props = z.infer<typeof zTheHeroP>;
 ---
 
 <div class:list={['flex items-center justify-center bg-cover bg-center font-bold relative', cEl, ...classes]}>
-  <UiImg image={image} loading="eager" class="absolute inset-0 w-full !h-full object-cover" />
+  <UiImg image={image} loading="eager" fit="cover" class="absolute inset-0 w-full h-full" />
   <div class="relative p-40 text-white text-center uppercase tracking-widest">
-    <div
-      class="absolute inset-0 bg-primary [mask-image:url(/splash.webp)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
-    >
-    </div>
-    <h1 class="my-2 relative text-5xl sm:text-7xl max-w-2xl">{title}</h1>
+    <div class:list={['absolute inset-0 bg-primary', cMask]}></div>
+    <h1 class="my-2 relative text-4xl sm:text-7xl max-w-2xl">{title}</h1>
     <h2 class="relative text-xs">{subtitle}</h2>
   </div>
 </div>

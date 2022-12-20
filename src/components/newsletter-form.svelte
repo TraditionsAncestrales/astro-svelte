@@ -4,11 +4,13 @@
   {validate}
   {messages}
   intent="secondary"
+  submitText="Je m'inscris"
+  submitTextDisabled="Inscription en cours..."
   cSubmit="w-full justify-center sm:w-auto"
-  class="sm:flex items-start gap-4 {cEl}"
+  class="sm:flex-row sm:items-start {cEl}"
 >
   <svelte:fragment slot="fields" let:form>
-    <FormEmail name="email" placeholder="Votre courriel" {form} class="max-w-sm" />
+    <FormEmail name="email" placeholder="Votre courriel" {form} intent="secondary" class="sm:max-w-xs xl:max-w-sm" />
   </svelte:fragment>
 </UiForm>
 

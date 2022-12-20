@@ -1,4 +1,4 @@
-<button type="submit" {disabled} class="{BTN({intent})} {cEl}">{disabled ? 'Envoi en cours...' : 'Envoyer'}</button>
+<button type="submit" {disabled} class="{BTN({intent})} {cEl}">{disabled ? textDisabled : text}</button>
 
 <script lang="ts">
   import type {FormSubmitP} from '~/schemas/ui';
@@ -7,6 +7,8 @@
   // PROPS =================================================================================================================================
   export let form: FormSubmitP['form'];
   export let intent: FormSubmitP['intent'] = 'primary';
+  export let text: FormSubmitP['text'];
+  export let textDisabled: FormSubmitP['textDisabled'];
 
   // STYLES ================================================================================================================================
   let cEl = '';

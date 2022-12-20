@@ -3,23 +3,23 @@ import type { z } from 'zod';
 import type { zUiFeaturesP } from '~/schemas/ui';
 
 // PROPS ===================================================================================================================================
-const {intent, items = []} = Astro.props;
+const {features = [], intent = 'white'} = Astro.props;
 
 // STYLES ==================================================================================================================================
 const {class: cEl = ''} = Astro.props;
-const cElBg = intent === 'white' ? 'bg-primary/25' : 'bg-white/25';
+const cElBg = intent === 'white' ? 'bg-primary-200' : 'bg-white/25';
 
 // TYPES ===================================================================================================================================
 export type Props = z.infer<typeof zUiFeaturesP>;
 ---
 
-<dl class:list={['w-full flex flex-wrap p-4', cElBg, cEl]}>
+{features && <dl class:list={['w-full p-4', cElBg, cEl]}>
   {
-    items.map(({key, value}) => (
-      <div class="mx-4 flex gap-2">
-        <dd class="font-bold">{key} :</dd>
+    features.map(({key, value}) => (
+      <div class="flex gap-2">
+        <dd class="flex-none font-bold">{key} :</dd>
         <dt>{value}</dt>
       </div>
     ))
   }
-</dl>
+</dl>}

@@ -1,0 +1,29 @@
+---
+import { Sprite } from 'astro-icon';
+import type { z } from 'zod';
+import type { zTheHeaderP } from '~/schemas/ui';
+import NavItem from './nav-item.astro';
+
+// PROPS ===================================================================================================================================
+const {menu} = Astro.props;
+
+// VARS ====================================================================================================================================
+const leftNavs = menu.items.slice(0, Math.ceil(0.5 * menu.items.length));
+const rightNavs = menu.items.slice(Math.ceil(0.5 * menu.items.length));
+
+// STYLES ==================================================================================================================================
+const {class: cEl = '', 'class:list': classes = []} = Astro.props;
+
+// TYPES ===================================================================================================================================
+export type Props = z.infer<typeof zTheHeaderP>;
+---
+
+<ul class:list={['flex items-center', cEl, ...classes]}>
+  {leftNavs.map((nav) => <NavItem item={nav} />)}
+  <li>
+    <a href="/">
+      <Sprite name="logo" class="mx-8 w-20 h-20 fill-neutral-800 text-primary group-data-scrolled:hidden hover:text-primary-400" />
+    </a>
+  </li>
+  {rightNavs.map((nav) => <NavItem item={nav} />)}
+</ul>

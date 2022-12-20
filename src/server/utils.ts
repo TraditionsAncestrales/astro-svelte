@@ -31,5 +31,5 @@ export const procedure = <I extends unknown[] = [], O = unknown>(name: string, {
 };
 
 // TYPES ===================================================================================================================================
-export type ProcedureO<I extends unknown[], O> = {debug?: boolean; input?: ZType<unknown, I>; output?: ZType<O>; query: string};
+export type ProcedureO<I extends unknown[], O> = {debug?: boolean; input?: ZType<unknown, I>; output?: ZType<O, unknown>; query: string};
 export type ZType<O = unknown, I = O> = z.ZodType<O, z.ZodTypeDef, I>;

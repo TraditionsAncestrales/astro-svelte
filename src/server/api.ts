@@ -1,14 +1,15 @@
-import {qEntries, qEntry, qEntryProps, qItemProps, qLayout, qPaths, qRefs, qSlugProp} from '~/data/queries';
-import {zArticle, zArticleItem, zConsultation, zConsultationItem, zEvent, zProductItem, zTestimony, zTraining, zTrainingItem, zWorkshop, zWorkshopItem} from '~/schemas';
+import {z} from 'zod';
+import {qEntries, qEntry, qEntryProps, qImageProp, qItemProps, qLayout, qPaths} from '~/data/queries';
+import {zArticle, zArticleItem, zConsultation, zConsultationItem, zEvent, zImage, zProductItem, zTestimony, zTraining, zTrainingItem, zWorkshop, zWorkshopItem} from '~/schemas';
 import {zGeneralKnowledgeInput, zKnowledgePaths, zKnowledgeSlugInput, zOutput, zPaths, zSlugInput} from '~/schemas/api';
 import {procedure} from './utils';
 
 // ARTICLE ===============================================================================================================================
 export const getArticleData = procedure('ARTICLE PAGE', {
   input: zSlugInput,
-  output: zOutput.extend({entry: zArticle.pick({description: true, image: true, title: true})}),
+  output: zOutput.extend({entry: zArticle.omit({excerpt: true, knowledge: true, slug: true, uri: true})}),
   query: `${qEntry('article')}{
-    'entry': {${qEntryProps}},
+    'entry': {${qEntryProps('article')}},
     'layout': ${qLayout('article')}
   }`,
 });
@@ -18,9 +19,9 @@ export const getArticlePaths = procedure('ARTICLE PATHS', {output: zPaths, query
 // CONSULTATION ============================================================================================================================
 export const getConsultationData = procedure('CONSULTATION PAGE', {
   input: zSlugInput,
-  output: zOutput.extend({entry: zConsultation.pick({description: true, image: true, title: true})}),
+  output: zOutput.extend({entry: zConsultation.omit({excerpt: true, knowledge: true, slug: true, uri: true})}),
   query: `${qEntry('consultation')}{
-    'entry': {${qEntryProps}}, 
+    'entry': {${qEntryProps('consultation')}}, 
     'layout': ${qLayout('consultation')},
   }`,
 });
@@ -33,13 +34,16 @@ export const getGeneralKnowledgeData = procedure('GENERAL KNOWLEDGE PAGE', {
   output: zOutput.extend({
     article: zArticleItem,
     events: zEvent.array(),
-    testimonies: zTestimony.array(),
+    testimonies: z.object({image: zImage, items: zTestimony.array()}),
   }),
   query: `${qEntry('knowledge', '$knowledge')}{
     'article': ${qEntry('article', "'la-fondatrice'")}{${qItemProps('article')}},
-    'events': ${qEntries('event')}{},
+    'events': ${qEntries('event')}{${qItemProps('event')}, from, to, type, url},
     'layout': ${qLayout('knowledge')},
-    'testimonies': ${qEntries('testimony')},
+    'testimonies': {
+      ...${qEntries('config')}[0]{${qImageProp('testimoniesImage')}},
+      'items': ${qEntries('testimony')},
+    },
   }`,
 });
 
@@ -52,14 +56,14 @@ export const getKnowledgeData = procedure('KNOWLEDGE PAGE', {
     trainings: zTrainingItem.array(),
     workshops: zWorkshopItem.array(),
   }),
-  query: `${qEntry('knowledge', '$knowledge')}{
-    'article': ${qRefs('article')}[0]{${qItemProps('article')}},
-    'consultations': ${qRefs('consultation')}{${qItemProps('consultation')}, duration, places[]->{${qSlugProp}, title}, price},
-    'events': ${qRefs('event')},
-    'layout': ${qLayout('knowledge')},
-    'trainings': ${qRefs('training')}{${qItemProps('training')}, duration, places[]->{${qSlugProp}, title}, price},
-    'workshops': ${qRefs('workshop')}{${qItemProps('workshop')}, duration, places[]->{${qSlugProp}, title}, price},
-  }`,
+  query: `${qEntry('page', '$knowledge')}{
+    article->{${qItemProps('article')}},
+    consultations[]->{${qItemProps('consultation')}},
+    'events': *[_type == 'event' && type->knowledge._ref == ^.knowledge._ref]{${qItemProps('event')}},
+    'layout': ${qLayout('page')},
+    trainings[]->{${qItemProps('training')}},
+    workshops[]->{${qItemProps('workshop')}},
+  }`
 });
 
 export const getKnowledgePaths = procedure('KNOWLEDGE PATHS', {output: zKnowledgePaths, query: `${qPaths('knowledge')}`});
@@ -68,7 +72,7 @@ export const getKnowledgePaths = procedure('KNOWLEDGE PATHS', {output: zKnowledg
 export const getShopData = procedure('SHOP PAGE', {
   output: zOutput.extend({items: zProductItem.array()}),
   query: `{
-    'items': ${qEntries('product')}{${qItemProps('product')}, price}, 
+    'items': ${qEntries('product')}{${qItemProps('product')}}, 
     'layout': ${qLayout('product')},
   }`,
 });
@@ -76,9 +80,9 @@ export const getShopData = procedure('SHOP PAGE', {
 // TRAINING ================================================================================================================================
 export const getTrainingData = procedure('TRAINING PAGE', {
   input: zSlugInput,
-  output: zOutput.extend({entry: zTraining.pick({description: true, image: true, title: true})}),
+  output: zOutput.extend({entry: zTraining.omit({excerpt: true, knowledge: true, slug: true, uri: true})}),
   query: `${qEntry('training')}{
-    'entry': {${qEntryProps}}, 
+    'entry': {${qEntryProps('training')}}, 
     'layout': ${qLayout('training')},
   }`,
 });
@@ -88,9 +92,9 @@ export const getTrainingPaths = procedure('TRAINING PATHS', {output: zPaths, que
 // WORKSHOP ================================================================================================================================
 export const getWorkshopData = procedure('WORKSHOP PAGE', {
   input: zSlugInput,
-  output: zOutput.extend({entry: zWorkshop.pick({description: true, image: true, title: true})}),
+  output: zOutput.extend({entry: zWorkshop.omit({excerpt: true, knowledge: true, slug: true, uri: true})}),
   query: `${qEntry('workshop')}{
-    'entry': {${qEntryProps}}, 
+    'entry': {${qEntryProps('training')}}, 
     'layout': ${qLayout('workshop')},
   }`,
 });

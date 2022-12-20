@@ -1,19 +1,32 @@
 ---
 import type { z } from 'zod';
 import type { zUiImgP } from '~/schemas/ui';
-import { getImageProps } from '~/server/ui';
+import { fromSanityImage } from '~/server/sanity';
 
 // PROPS ===================================================================================================================================
-const {image, loading = 'lazy'} = Astro.props;
+const {border, borderRight, fit, height, image, loading = 'lazy', ratio, sizes} = Astro.props;
+const {widths = [360, 640, 728, 1024, 1280, 1536, 1920]} = Astro.props;
 
 // VARS ====================================================================================================================================
-const props = getImageProps(image);
+const props = fromSanityImage({height, image, ratio, sizes, widths});
 
 // STYLES ================================================================================================================================
-const {class: cEl = '', 'class:list': classes = []} = Astro.props;
+const {cBorder: kBorder = '', cImg: kImg = '', class: cEl = '', 'class:list': classes = []} = Astro.props;
+const cBorderImageSource = border === 1 ? '[border-image-source:url(/deco1.png)]' : '[border-image-source:url(/deco2.png)]';
+const cBorderImage = `[border-image-repeat:round] [border-image-slice:60_fill] [border-image-width:60px] ${cBorderImageSource}`;
+const cBorder = ['absolute inset-0 translate-y-10', borderRight ? 'translate-x-10' : '-translate-x-10', cBorderImage, kBorder];
+const cImg = ['w-full h-full', fit === 'contain' ? 'object-contain' : fit ? 'object-cover' : '', kImg];
 
 // TYPES ===================================================================================================================================
 export type Props = z.infer<typeof zUiImgP>;
 ---
 
-<img loading={loading} alt="" class:list={['h-auto', cEl, ...classes]} {...props} />
+{
+  image && (
+    <div class:list={['overflow-hidden', cEl, ...classes]}>
+      {border && <div class:list={cBorder} />}
+      <img loading={loading} alt="" class:list={[cImg, 'absolute inset-0']} src={image.lqip} />
+      <img loading={loading} alt="" class:list={[cImg, 'relative']} {...props} />
+    </div>
+  )
+}

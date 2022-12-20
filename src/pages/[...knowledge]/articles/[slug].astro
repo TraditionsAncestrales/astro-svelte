@@ -1,4 +1,5 @@
 ---
+import UiImg from '~/components/ui-img.astro';
 import UiSection from '~/components/ui-section.astro';
 import UiText from '~/components/ui-text.astro';
 import UiTitle from '~/components/ui-title.astro';
@@ -8,6 +9,13 @@ import { getArticleData } from '~/server/api';
 // PATHS ===================================================================================================================================
 export { getArticlePaths as getStaticPaths } from '~/server/api';
 
+// STYLES ==================================================================================================================================
+const cImg = ['relative shadow-lg shadow-black/50'];
+
+// VARS ====================================================================================================================================
+const sizes = `(min-width: 1536px) 42rem, (min-width: 1280px) 36rem, (min-width: 1024px) 28rem, (min-width: 768px) 20rem (min-width: 640px) 36rem, 100vw`;
+const widths = [320, 448, 576, 672];
+
 // DATA ====================================================================================================================================
 const {slug} = Astro.params;
 const data = await getArticleData(slug as string);
@@ -16,8 +24,9 @@ const {description, image, title} = entry;
 ---
 
 <Layout {...layout}>
-  <UiSection border="all" intent="white" image={image} imageRight cImageImg="aspect-none">
-    <UiTitle title={title} />
-    <UiText value={description} />
+  <UiSection asideRight border="all" intent="white">
+    <UiTitle slot="header" title={title} class="mb-8" />
+    <UiImg slot="aside" image={image} widths={widths} sizes={sizes} class:list={cImg} />
+    <UiText text={description} />
   </UiSection>
 </Layout>

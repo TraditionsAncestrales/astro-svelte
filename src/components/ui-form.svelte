@@ -1,10 +1,10 @@
-<form use:form method="POST" {action} {name} {...netlifyProps} class={cEl}>
+<form use:form method="POST" {action} {name} {...netlifyProps} class="flex flex-col gap-4 {cEl}">
   {#if netlify}
     <input type="hidden" name="form-name" value={name} />
     <input name={netlifyProps['netlify-honeypot']} class="hidden" />
   {/if}
   <slot name="fields" form={formState} />
-  <FormSubmit form={formState} {intent} class="{cSubmit}" />
+  <FormSubmit form={formState} {intent} text={submitText} textDisabled={submitTextDisabled} class="mt-4 sm:mt-0 {cSubmit}" />
 </form>
 
 {#if alert}<div transition:fly={{y: 40}} class="z-50 fixed inset-x-10 bottom-10 flex justify-center">
@@ -23,6 +23,8 @@
   export let messages: Record<number, string>;
   export let name: string;
   export let netlify = false;
+  export let submitText = 'Envoyer';
+  export let submitTextDisabled = 'Envoi en cours...';
   export let validate: any;
 
   // STYLES ================================================================================================================================

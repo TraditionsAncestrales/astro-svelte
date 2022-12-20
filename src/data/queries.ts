@@ -3,20 +3,38 @@ import {PageType, URL_DIRS} from '~/schemas';
 // CORE ====================================================================================================================================
 export const qSlug = `slug.current`;
 export const qKnowledgeSlug = `knowledge->${qSlug}`;
+export const qImage = (name = 'image') => `{...${name}, ...${name}.asset->metadata{dimensions, lqip}}`;
 
-export const qUri = (type: PageType) => {
+export const qHref = (type: PageType) => {
+  if (type === 'page') return `'/' + ${qSlug}`;
   if (type === 'knowledge') return `'/' + ${qSlug}`;
-  if (type === 'product') return `'/'`;
+  if (type === 'product' || type === 'event') return `url`;
   return `'/' + ${qKnowledgeSlug} + '/${URL_DIRS[type]}/' + ${qSlug}`;
 };
 
-export const qImageProp = `'image': image`;
+
+export const qImageProp = (name="image") => `defined(${name}) => {'image': ${qImage(name)}}`;
 export const qKnowledgeSlugProp = `'knowledge': ${qKnowledgeSlug}`;
 export const qSlugProp = `'slug': ${qSlug}`;
-export const qUriProp = (type: PageType) => `'uri': ${qUri(type)}`;
+export const qHrefProp = (type: PageType) => `'href': ${qHref(type)}`;
 
-export const qEntryProps = `description, ${qImageProp}, title`;
-export const qItemProps = (type: PageType) => `excerpt, ${qImageProp}, ${qSlugProp}, title, ${qUriProp(type)}`;
+export const qFeaturesProp = (type: PageType) => {
+  if (['article', 'knowledge'].includes(type)) return;
+  let result = `'features': [`;
+  if (type === 'event') result += `{'key': 'De', 'value': from}, {'key': 'à', 'value': to}`;
+  else {
+    result += `{'key': 'Tarif', 'value': price}`;
+    if (type !== 'product')
+      result += `, {'key': 'Durée', 'value': duration}, {'key': 'Endroits', 'value': array::join(places[]->.title, ', ')}`;
+  }
+  return result + ']';
+};
+
+export const qEntryProps = (type: PageType) =>
+  ['description', qFeaturesProp(type), qHrefProp(type), qImageProp(), 'title'].filter(Boolean).join(', ');
+
+export const qItemProps = (type: PageType) =>
+  ['excerpt', qFeaturesProp(type), qHrefProp(type), qImageProp(), qSlugProp, 'title'].filter(Boolean).join(', ');
 
 export const qIs = (slug = '$slug') => `${qSlug} == ${slug}`;
 export const qIsnt = (slug = '$slug') => `${qSlug} != ${slug}`;
@@ -24,7 +42,6 @@ export const qIsnt = (slug = '$slug') => `${qSlug} != ${slug}`;
 export const qEntries = (type: string) => `*[_type == '${type}']`;
 export const qEntry = (type: string, slug = '$slug') => `*[_type == '${type}' && ${qIs(slug)}][0]`;
 export const qOtherEntries = (type: string, slug = '$slug') => `*[_type == '${type}' && ${qIsnt(slug)}]`;
-export const qRefs = (type: string) => `*[_type == '${type}' && references(^._id)]`;
 
 // PATHS ===================================================================================================================================
 export const qPaths = (type: PageType) =>
@@ -39,20 +56,23 @@ export const qLayout = (type: PageType) => {
   return `${qEntries('config')}[0]{
 		'footer': {city, email, fb, instagram, phone, street, zipcode},
 		'hero': {
-			${qImageProp}, subtitle, title, 
-			^.${prefix}${qIsnt("'general'")} => ^${type === 'knowledge' ? '' : '.knowledge->'}{${qImageProp}, title}
+			${qImageProp()}, subtitle, title, 
+			^.${prefix}${qIsnt("'general'")} => ^${type === 'knowledge' ? '' : '.knowledge->'}{${qImageProp()}, title}
 		},
 		menu->{
 			label,
 			${qSlugProp}, 
 			items[]->{
-				'children': ${qRefs('nav')}{label, 'to': '/' + ^.${qSlug} + '/' + ${qSlug}},
 				label,
 				'to': '/' + coalesce(${qSlug}, ''),
+				'isActive': false,
 			}
 		},
 		'organization': ${qEntry('article', "'l-association'")}{${qItemProps('article')}},
-		'others': ${qOtherEntries('knowledge', type === 'knowledge' ? '$knowledge' : 'knowledge._ref')}{${qItemProps('knowledge')}},
+		'others': ${qOtherEntries(
+      'knowledge',
+      type === 'knowledge' ? '$knowledge' : type === 'product' ? "'general'" : `^.^.${qKnowledgeSlug}`
+    )}{${qItemProps('knowledge')}},
 		'pageType': '${type}',
 		'theme': ${type === 'product' ? "'general'" : `^.${prefix}${qSlug}`},
 	}`;

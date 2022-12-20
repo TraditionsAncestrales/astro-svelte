@@ -2,10 +2,10 @@
 import '@splidejs/splide/css';
 
 // STYLES ==================================================================================================================================
-const {class: cEl = ''} = Astro.props;
+const {class: cEl = '', 'class:list': classes = ''} = Astro.props;
 ---
 
-<div class:list={['splide', cEl]} role="group" aria-label="Splide Basic HTML Example">
+<div class:list={['splide', cEl, classes]} role="group" aria-label="Splide Basic HTML Example">
   <div class="splide__track">
     <ul class="splide__list">
       <slot />
@@ -18,6 +18,9 @@ const {class: cEl = ''} = Astro.props;
 
   document.querySelectorAll('.splide').forEach((el) => {
     const splide = new Splide(el as HTMLElement, {
+      breakpoints: {
+        640: {fixedWidth: '100%'},
+      },
       fixedWidth: '24rem',
       gap: '2rem',
       padding: '1rem',

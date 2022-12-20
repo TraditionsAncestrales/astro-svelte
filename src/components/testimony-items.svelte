@@ -1,8 +1,10 @@
 {#key item}
   <div in:fly={{y: 400, duration: 1000}} out:fly={{y: -400, duration: 1000}} class={cEl}>
-    <h5 class="text-3xl italic font-bold">{item.title}</h5>
-    <p class="italic">{item.content}</p>
-    <p class="font-bold">{item.author}</p>
+    <article class="max-w-4xl">
+      <h5 class="mb-8 text-3xl italic font-bold">{item.title}</h5>
+      <p class="mb-4 italic">{item.content}</p>
+      <p class="font-bold">{item.author}</p>
+    </article>
   </div>
 {/key}
 
@@ -15,7 +17,7 @@
   export let items: Testimony[];
 
   // STYLES =================================================================================================================================
-  const cEl = 'absolute inset-0 prose mx-auto flex-1 flex flex-col items-center justify-center text-center lg:prose-xl';
+  const cEl = 'absolute inset-0 flex-1 flex flex-col items-center justify-center text-center';
 
   // VARS ==================================================================================================================================
   let selected = 0;

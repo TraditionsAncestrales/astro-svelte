@@ -7,7 +7,7 @@ import type { zUiTitleP } from '~/schemas/ui';
 const {title} = Astro.props;
 
 // STYLES ==================================================================================================================================
-const {class: cEl = '', cStain = '-top-1 text-primary/50', cTitle = 'py-2 px-6 text-3xl'} = Astro.props;
+const {class: cEl = '', cStain = '-top-1 text-primary-300', cTitle = 'py-2 px-6 text-3xl'} = Astro.props;
 
 // TYPES ===================================================================================================================================
 export type Props = z.infer<typeof zUiTitleP>;
@@ -15,7 +15,7 @@ export type Props = z.infer<typeof zUiTitleP>;
 
 {
   title && (
-    <div class:list={['mb-8 relative inline-flex', cEl]}>
+    <div class:list={['relative inline-flex', cEl]}>
       <Sprite name="stain" class:list={['absolute left-0 w-full h-full', cStain]} />
       <h4 class:list={['relative inline-flex font-heading uppercase', cTitle]}>{title}</h4>
     </div>

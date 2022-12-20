@@ -1,14 +1,16 @@
 ---
 import NewsletterForm from './newsletter-form.svelte';
 import UiSection from './ui-section.astro';
+import UiTitle from './ui-title.astro';
 
 // PROPS =================================================================================================================================
 const {...rest} = Astro.props;
 ---
 
-<UiSection title="Newsletter" {...rest}>
+<UiSection {...rest}>
+  <UiTitle slot="header" title="Newsletter" class="mb-8" />
   <div class="w-full flex flex-col gap-4 lg:flex-row lg:gap-12">
-    <p class="max-w-lg">Pour recevoir chaque semaine mon bulletin, c'est simple, vous avez juste à saisir votre courriel :</p>
+    <p class="text-justify lg:max-w-sm xl:max-w-lg">Pour recevoir chaque semaine mon bulletin, c'est simple, vous avez juste à saisir votre courriel :</p>
     <NewsletterForm client:visible class="flex-1" />
   </div>
 </UiSection>

@@ -1,14 +1,14 @@
 import {z} from 'zod';
-import {fill} from '~/data/utils';
+import {banNull, fill} from '~/data/utils';
 import {fillString, parseFormDataValue} from '~/server/utils';
-import {zSanityBlock, zSanityImage, zSanityReference} from './sanity';
+import {zSanityBlock, zSanityImage, zSanityImageMetadata, zSanityReference} from './sanity';
 
 // ENUMS ===================================================================================================================================
 export const formTypes = ['fail', 'success', 'unnormalized', 'unsanitized'] as const;
 export const zFormType = z.enum(formTypes);
 export const FORM_TYPE = zFormType.enum;
 
-export const pageTypes = ['article', 'consultation', 'knowledge', 'product', 'training', 'workshop'] as const;
+export const pageTypes = ['article', 'consultation', 'event', 'knowledge', 'page', 'product', 'training', 'workshop'] as const;
 export const zPageType = z.enum(pageTypes);
 export const PAGE_TYPE = zPageType.enum;
 
@@ -20,24 +20,28 @@ export const URL_DIRS = {
   workshop: 'ateliers',
 } as const;
 
+// FEATURE =================================================================================================================================
+export const zFeature = z.object({key: z.string(), value: z.string()});
+
 // FORMS ===================================================================================================================================
 export const zForm = z.object({data: z.any(), type: zFormType, values: z.any()});
 
 // IMAGE ===================================================================================================================================
-export const zImage = zSanityImage.extend({asset: zSanityReference});
+export const zImage = zSanityImage.extend({asset: zSanityReference}).merge(zSanityImageMetadata.pick({dimensions: true, lqip: true}));
 
 // ITEM ====================================================================================================================================
 export const zItem = z.object({
-  ...fillString('slug', 'title', 'uri'),
+  ...fillString('href', 'slug', 'title'),
   excerpt: zSanityBlock.array(),
+  features: zFeature.array().optional(),
   image: zImage,
 });
 
-export const zEntry = zItem.extend({knowledge: z.string(), description: zSanityBlock.array()});
+export const zEntry = zItem.omit({excerpt: true, href: true}).extend({knowledge: z.string(), description: zSanityBlock.array()});
 
 // ARTICLE =================================================================================================================================
-export const zArticle = zEntry.extend({});
-export const zArticleItem = zItem.extend({});
+export const zArticle = zEntry.extend({image: zImage.nullish().transform(banNull)});
+export const zArticleItem = zItem.extend({image: zImage.nullish().transform(banNull)});
 
 // CONTACT =================================================================================================================================
 export const zContactDto = z.object(fill(z.string().transform(parseFormDataValue))('email', 'forename', 'surname'));
@@ -50,8 +54,7 @@ export const zContact = z.object({
 export const zContactForm = zForm.extend({values: zContactDto.optional()});
 
 // NAV =====================================================================================================================================
-const zChildlessNav = z.object(fillString('label', 'to'));
-export const zNav = zChildlessNav.extend({children: zChildlessNav.array()});
+export const zNav = z.object({...fillString('label', 'to'), isActive: z.boolean()});
 
 // NEWSLETTER ==============================================================================================================================
 export const zNewsletterDto = z.object(fill(z.string().transform(parseFormDataValue))('email', 'forename', 'surname'));
@@ -81,28 +84,28 @@ export const zConfig = z.object({
 });
 
 // CONSULTATION ============================================================================================================================
-const zConsultationExtra = z.object({...fillString('duration', 'price'), places: zPlace.array()});
+const zConsultationExtra = z.object({features: zFeature.array()});
 export const zConsultation = zEntry.merge(zConsultationExtra);
 export const zConsultationItem = zItem.merge(zConsultationExtra);
 
 // EVENT ===================================================================================================================================
-export const zEvent = z.object({...fillString('slug', 'title')});
+export const zEvent = zItem.extend({});
 
 // KNOWLEDGE ===============================================================================================================================
 export const zKnowledge = zItem;
 
 // PRODUCT =================================================================================================================================
-const zProductExtra = z.object({price: z.string()});
+const zProductExtra = z.object({features: zFeature.array()});
 export const zProduct = zEntry.omit({knowledge: true}).merge(zProductExtra);
 export const zProductItem = zItem.merge(zProductExtra);
 
 // TRAINING ================================================================================================================================
-const zTrainingExtra = z.object({...fillString('duration', 'price'), places: zPlace.array()});
+const zTrainingExtra = z.object({features: zFeature.array()});
 export const zTraining = zEntry.merge(zTrainingExtra);
 export const zTrainingItem = zItem.merge(zTrainingExtra);
 
 // WORKSHOP ================================================================================================================================
-const zWorkshopExtra = z.object({...fillString('duration', 'price'), places: zPlace.array()});
+const zWorkshopExtra = z.object({features: zFeature.array()});
 export const zWorkshop = zEntry.merge(zWorkshopExtra);
 export const zWorkshopItem = zItem.merge(zWorkshopExtra);
 

@@ -1,55 +1,24 @@
 ---
-import { Sprite } from 'astro-icon';
 import type { z } from 'zod';
 import type { zTheHeaderP } from '~/schemas/ui';
+import NavBurger from './nav-burger.svelte';
+import NavItems from './nav-items.astro';
+import TheLogo from './the-logo.astro';
 
 // PROPS ===================================================================================================================================
 const {menu} = Astro.props;
 
-// VARS ====================================================================================================================================
-const leftNavs = menu.items.slice(0, Math.ceil(0.5 * menu.items.length));
-const rightNavs = menu.items.slice(Math.ceil(0.5 * menu.items.length));
-
 // STYLES ==================================================================================================================================
 const {class: cEl = '', 'class:list': classes = []} = Astro.props;
-const cLink = 'border-b-2 border-transparent text-xs font-bold p-2 uppercase group-data-top:text-white';
 
 // TYPES ===================================================================================================================================
-export type Props =  z.infer<typeof zTheHeaderP>;
+export type Props = z.infer<typeof zTheHeaderP>;
 ---
 
-<div class:list={["flex group-data-scrolled:bg-white group-data-scrolled:p-2 group-data-scrolled:shadow-lg", cEl, classes]}>
-  <a href="/" class="w-40 gap-1 items-center hidden group-data-scrolled:flex">
-    <Sprite name="logo" class="w-12 h-12 fill-dark text-primary" />
-    <hgroup class="font-heading uppercase">
-      <h3 class="text-sm leading-none text-dark">Traditions</h3>
-      <h4 class="text-xs leading-none text-surface-500">Ancestrales</h4>
-    </hgroup>
-  </a>
-  <nav class="flex-1 flex justify-center">
-    <ul class="flex items-center">
-      {
-        leftNavs.map(({label, to: href}) => (
-          <li>
-            <a href={href} class:list={cLink}>
-              {label}
-            </a>
-          </li>
-        ))
-      }
-      <li><a href="/"><Sprite name="logo" class="w-20 h-20 fill-dark text-primary group-data-scrolled:hidden" /></a></li>
-      {
-        rightNavs.map(({label, to: href}) => (
-          <li>
-            <a href={href} class:list={cLink}>
-              {label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+<div class:list={[`bg-white p-2 sm:bg-transparent group-data-scrolled:bg-white group-data-scrolled:shadow-lg`, cEl, ...classes]}>
+  <nav class="mx-auto container flex items-center justify-between sm:justify-center sm:group-data-scrolled:justify-between">
+    <TheLogo class="sm:hidden group-data-scrolled:flex" />
+    <NavBurger client:media="(max-width: 640px)" menu={menu} class="sm:hidden" />
+    <NavItems menu={menu} class="hidden sm:flex" />
   </nav>
-  <div class="w-40"></div>
 </div>
-
-

@@ -5,7 +5,7 @@
   {messages}
   {validate}
   cSubmit="self-end"
-  class="mb-4 flex flex-col {cEl}"
+  class="mb-4 {cEl}"
 >
   <svelte:fragment slot="fields" let:form>
     <FormText name="fullname" label="Votre nom" {form} />

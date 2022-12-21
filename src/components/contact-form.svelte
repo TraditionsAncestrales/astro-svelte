@@ -8,9 +8,9 @@
   class="mb-4 {cEl}"
 >
   <svelte:fragment slot="fields" let:form>
-    <FormText name="fullname" label="Votre nom" {form} />
-    <FormEmail name="email" label="Votre courriel" {form} />
-    <FormArea name="message" label="Votre message" {form} />
+    <FormText id="contactFullname" name="fullname" label="Votre nom" {form} />
+    <FormEmail id="contactEmail" name="email" label="Votre courriel" {form} />
+    <FormArea id="contactMessage" name="message" label="Votre message" {form} />
   </svelte:fragment>
 </UiForm>
 

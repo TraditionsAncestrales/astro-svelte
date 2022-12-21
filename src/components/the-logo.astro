@@ -10,7 +10,7 @@ const {class: cEl = '', 'class:list': classes = []} = Astro.props;
 export type Props = z.infer<typeof zComponentStyles>;
 ---
 
-<a href="/" class:list={['flex gap-1 items-center', cEl, ...classes]}>
+<a href="/" aria-label="Retour à l'accueil" class:list={['flex gap-1 items-center', cEl, ...classes]}>
 	<Sprite name="logo" class="w-12 h-12 fill-neutral-800 text-primary hover:text-primary-400" />
 	<hgroup class="font-heading uppercase">
 		<h3 class="text-sm leading-none text-neutral-800">Traditions</h3>

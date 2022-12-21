@@ -39,8 +39,8 @@ export const zSvelteComponentStyles = zComponentStyles.omit({'class:list': true}
 // FORM CONTROL ============================================================================================================================
 export const zFormControlData = z.object({
   ...fill(z.string().optional())('label', 'placeholder'),
+  ...fillString('id','name'),
   intent: zIntent,
-  name: z.string(),
 });
 export const zFormControlP = zFormControlData.merge(zSvelteComponentStyles);
 

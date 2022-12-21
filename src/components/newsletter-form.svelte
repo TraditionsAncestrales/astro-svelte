@@ -10,7 +10,7 @@
   class="sm:flex-row sm:items-start {cEl}"
 >
   <svelte:fragment slot="fields" let:form>
-    <FormEmail name="email" placeholder="Votre courriel" {form} intent="secondary" class="sm:max-w-xs xl:max-w-sm" />
+    <FormEmail id="newsletterEmail" name="email" placeholder="Votre courriel" {form} intent="secondary" class="sm:max-w-xs xl:max-w-sm" />
   </svelte:fragment>
 </UiForm>
 

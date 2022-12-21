@@ -16,19 +16,19 @@ export type Props = z.infer<typeof zTheFooterP>;
 
 <UiSection border="top" intent="dark" class:list={['text-white items-center', cEl, classes]}>
   <div class="container flex flex-col justify-between sm:items-center gap-8 sm:flex-row">
-    <dl class="flex flex-col">
+    <div class="flex flex-col">
       <div class="flex items-center gap-4 p-3">
         <Sprite name="bi:pin-map" class="w-6 h-6 text-primary" />
         <span class="flex-auto">
-          <dt>{street}</dt>
-          <dd>{zipcode} {city}</dd>
+          <div>{street}</div>
+          <div>{zipcode} {city}</div>
         </span>
       </div>
       <a href={'mailto:' + email} class="group/email">
         <div class="flex items-center gap-4 p-3">
           <Sprite name="ph:at" class="w-6 h-6 text-primary group-hover/email:text-primary-400" />
           <span class="flex-auto">
-            <dd>{email}</dd>
+            <div>{email}</div>
           </span>
         </div>
       </a>
@@ -36,11 +36,11 @@ export type Props = z.infer<typeof zTheFooterP>;
         <div class="flex items-center gap-4 p-3">
           <Sprite name="bi:phone" class="w-6 h-6 text-primary group-hover/phone:text-primary-400" />
           <span class="flex-auto">
-            <dd>{phone}</dd>
+            <div>{phone}</div>
           </span>
         </div>
       </a>
-    </dl>
+    </div>
     <div class="flex flex-col gap-3 sm:items-end">
       <div class="flex items-center justify-center gap-4">
         <a href="/" class="unstyled text-primary hover:text-primary-200"><Sprite name="ph:facebook-logo-thin" class="w-12 h-12" /></a>

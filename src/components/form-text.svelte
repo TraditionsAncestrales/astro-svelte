@@ -1,5 +1,5 @@
-<FormControl {form} {intent} {label} {name} class={cEl}>
-  <input {name} required class="{INPUT({touched: $touched[name]})} {cInput}" />
+<FormControl {form} {id} {intent} {label} {name} class={cEl}>
+  <input {id} {name} required class="{INPUT({touched: $touched[name]})} {cInput}" />
 </FormControl>
 
 <script lang="ts">
@@ -9,6 +9,7 @@
 
   // PROPS =================================================================================================================================
   export let form: FormTextP['form'];
+  export let id: FormTextP['id'];
   export let intent: FormTextP['intent'] = 'primary';
   export let label: FormTextP['label'];
   export let name: FormTextP['name'];

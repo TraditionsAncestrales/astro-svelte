@@ -1,5 +1,5 @@
-<FormControl {form} {intent} {label} {name} class={cEl}>
-  <textarea {name} rows="10" required class="{INPUT({touched: $touched[name]})} {cInput}" />
+<FormControl {form} {id} {intent} {label} {name} class={cEl}>
+  <textarea {id} {name} rows="10" required class="{INPUT({touched: $touched[name]})} {cInput}" />
 </FormControl>
 
 <script lang="ts">
@@ -9,6 +9,7 @@
 
   // PROPS =================================================================================================================================
   export let form: FormAreaP['form'];
+  export let id: FormAreaP['id'];
   export let intent: FormAreaP['intent'] = 'primary';
   export let label: FormAreaP['label'];
   export let name: FormAreaP['name'];

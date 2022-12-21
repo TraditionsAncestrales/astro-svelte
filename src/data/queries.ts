@@ -5,18 +5,18 @@ export const qSlug = `slug.current`;
 export const qKnowledgeSlug = `knowledge->${qSlug}`;
 export const qImage = (name = 'image') => `{...${name}, ...${name}.asset->metadata{dimensions, lqip}}`;
 
-export const qHref = (type: PageType) => {
-  if (type === 'page') return `'/' + ${qSlug}`;
-  if (type === 'knowledge') return `'/' + ${qSlug}`;
-  if (type === 'product' || type === 'event') return `url`;
-  return `'/' + ${qKnowledgeSlug} + '/${URL_DIRS[type]}/' + ${qSlug}`;
-};
-
-
 export const qImageProp = (name="image") => `defined(${name}) => {'image': ${qImage(name)}}`;
 export const qKnowledgeSlugProp = `'knowledge': ${qKnowledgeSlug}`;
 export const qSlugProp = `'slug': ${qSlug}`;
-export const qHrefProp = (type: PageType) => `'href': ${qHref(type)}`;
+
+export const qHrefProp = (type: PageType) => {
+  if (type === 'page') return `'href': '/' + ${qSlug}`;
+  if (type === 'knowledge') return `'href': '/' + ${qSlug}`;
+  if (type === 'product' || type === 'event') return `'href': url`;
+  return `${qKnowledgeSlug} != 'general' => {'href': '/' + ${qKnowledgeSlug} + '/${URL_DIRS[type]}/' + ${qSlug}}, 
+    ${qKnowledgeSlug} == 'general' => {'href': '/${URL_DIRS[type]}/' + ${qSlug}}
+  `;
+};
 
 export const qFeaturesProp = (type: PageType) => {
   if (['article', 'knowledge'].includes(type)) return;
@@ -25,7 +25,7 @@ export const qFeaturesProp = (type: PageType) => {
   else {
     result += `{'key': 'Tarif', 'value': price}`;
     if (type !== 'product')
-      result += `, {'key': 'Durée', 'value': duration}, {'key': 'Endroits', 'value': array::join(places[]->.title, ', ')}`;
+      result += `, {'key': 'Durée', 'value': duration}, {'key': 'Endroits', 'value': array::join(places[]->.title, 'ou ')}`;
   }
   return result + ']';
 };

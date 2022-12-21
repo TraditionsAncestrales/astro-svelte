@@ -14,9 +14,9 @@ const cMask = `[mask-image:url(/splash.webp)] [mask-size:contain] [mask-position
 export type Props = z.infer<typeof zTheHeroP>;
 ---
 
-<div class:list={['flex items-center justify-center bg-cover bg-center font-bold relative', cEl, ...classes]}>
+<div class:list={['w-full flex items-center justify-center bg-cover bg-center font-bold relative', cEl, classes]}>
   <UiImg image={image} loading="eager" fit="cover" class="absolute inset-0 w-full h-full" />
-  <div class="relative p-40 text-white text-center uppercase tracking-widest">
+  <div class="relative py-40 text-white text-center uppercase tracking-widest">
     <div class:list={['absolute inset-0 bg-primary', cMask]}></div>
     <h1 class="my-2 relative text-4xl sm:text-7xl max-w-2xl">{title}</h1>
     <h2 class="relative text-xs">{subtitle}</h2>

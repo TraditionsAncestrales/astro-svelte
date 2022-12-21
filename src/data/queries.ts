@@ -25,7 +25,7 @@ export const qFeaturesProp = (type: PageType) => {
   else {
     result += `{'key': 'Tarif', 'value': price}`;
     if (type !== 'product')
-      result += `, {'key': 'Durée', 'value': duration}, {'key': 'Endroits', 'value': array::join(places[]->.title, 'ou ')}`;
+      result += `, {'key': 'Durée', 'value': duration}, {'key': 'Endroits', 'value': array::join(places[]->.title, ' ou ')}`;
   }
   return result + ']';
 };

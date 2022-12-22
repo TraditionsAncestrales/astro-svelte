@@ -38,11 +38,11 @@ specifiers:
   svelte: ^3.55.0
   tailwindcss: ^3.2.4
   typescript: ^4.9.4
-  vite: ^4.0.2
+  vite: ^4.0.3
   zod: ^3.20.2
 
 dependencies:
-  '@astrojs/svelte': 1.0.2_2vrfhnnwyi3akwing4wviufjqq
+  '@astrojs/svelte': 1.0.2_p2s7zkyvfdvyv6n3sqngrdp4ji
   '@astrojs/tailwind': 2.1.3_tailwindcss@3.2.4
   '@fontsource/raleway': 4.5.11
   '@mailchimp/mailchimp_marketing': 3.0.80
@@ -82,7 +82,7 @@ devDependencies:
   prettier: 2.8.1
   prettier-plugin-astro: 0.7.0
   typescript: 4.9.4
-  vite: 4.0.2_@types+node@18.11.17
+  vite: 4.0.3_@types+node@18.11.17
 
 packages:
 
@@ -170,13 +170,13 @@ packages:
       prismjs: 1.29.0
     dev: false
 
-  /@astrojs/svelte/1.0.2_2vrfhnnwyi3akwing4wviufjqq:
+  /@astrojs/svelte/1.0.2_p2s7zkyvfdvyv6n3sqngrdp4ji:
     resolution: {integrity: sha512-cC3Pn475mOJdDM5IKMJ75hlah7jTWdVPkD7gUx+7ouJ/V9Q8H5OTmne+xG8zk2MquAHBL/ksmUS2pSzI9ByZkw==}
     engines: {node: ^14.18.0 || >=16.12.0}
     peerDependencies:
       svelte: ^3.46.4
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 1.4.0_svelte@3.55.0+vite@4.0.2
+      '@sveltejs/vite-plugin-svelte': 1.4.0_svelte@3.55.0+vite@4.0.3
       postcss-load-config: 3.1.4
       svelte: 3.55.0
       svelte-preprocess: 4.10.7_2jjm7lfk5kiww33mvr7qo2trqu
@@ -948,15 +948,15 @@ packages:
     resolution: {integrity: sha512-4wMPu9iN3/HL97QblBsBay3E1etIciR84izI3U+4iALY+JHCrI+a2jO0qbAZ/nxKoegypYEaiiqWXylm+/zfrw==}
     dev: true
 
-  /@netlify/build/29.2.1_@types+node@18.11.17:
-    resolution: {integrity: sha512-7Ff5QzCiTerFUou9yIvt3p9zB2rfLl/4+BqF5vYFC09ogtus8FpKHCadFH09h1Dfg7TZwV62eLmCBmpkkdOerw==}
+  /@netlify/build/29.2.2_@types+node@18.11.17:
+    resolution: {integrity: sha512-G9R2Z1rqeSxNZHfTUdXnw8zWms5rMuYQEpioUufgnsS7dnR8oH8P+rgyDuxTCBm8Y/MZZDB+AqIkLUQ35j9Yww==}
     engines: {node: ^14.16.0 || >=16.0.0}
     hasBin: true
     dependencies:
       '@bugsnag/js': 7.18.0
       '@netlify/cache-utils': 5.1.0_supports-color@9.3.1
       '@netlify/config': 20.2.0
-      '@netlify/edge-bundler': 7.1.0
+      '@netlify/edge-bundler': 8.0.0
       '@netlify/functions-utils': 5.1.1_supports-color@9.3.1
       '@netlify/git-utils': 5.1.0
       '@netlify/plugins-list': 6.61.0
@@ -1063,6 +1063,32 @@ packages:
 
   /@netlify/edge-bundler/7.1.0:
     resolution: {integrity: sha512-hYi6kT5qJ+thJbk9ouus0Gcwt9S3MAbAeI1TC9sS8wR3dwGS9T/TNRLgq0cjpV0cjJZMK+4NRsyw12Dn6c99/A==}
+    engines: {node: ^14.16.0 || >=16.0.0}
+    dependencies:
+      '@import-maps/resolve': 1.0.1
+      ajv: 8.11.2
+      ajv-errors: 3.0.0_ajv@8.11.2
+      better-ajv-errors: 1.2.0_ajv@8.11.2
+      common-path-prefix: 3.0.0
+      del: 7.0.0
+      env-paths: 3.0.0
+      execa: 6.1.0
+      find-up: 6.3.0
+      get-port: 6.1.2
+      glob-to-regexp: 0.4.1
+      jsonc-parser: 3.2.0
+      node-fetch: 3.3.0
+      node-stream-zip: 1.15.0
+      p-retry: 5.1.2
+      p-wait-for: 4.1.0
+      path-key: 4.0.0
+      semver: 7.3.8
+      tmp-promise: 3.0.3
+      uuid: 9.0.0
+    dev: true
+
+  /@netlify/edge-bundler/8.0.0:
+    resolution: {integrity: sha512-th0HKJ0oqsSVq+kyElP2e1goVZtElz+1b0dK+ddRj6BYAZfGjskoiN1LZo58QPHtZ8Vim3EYQwhDCaLddqGIQw==}
     engines: {node: ^14.16.0 || >=16.0.0}
     dependencies:
       '@import-maps/resolve': 1.0.1
@@ -1872,7 +1898,7 @@ packages:
     resolution: {integrity: sha512-5I30evTJcAJQXt6vJ26g2xEkG+l1nXcpEw4xpKh0/FWQ8ozmAeTbtniVtVmz2sH1Es3vgfC4SS8B2X4o5JMptA==}
     dev: false
 
-  /@sveltejs/vite-plugin-svelte/1.4.0_svelte@3.55.0+vite@4.0.2:
+  /@sveltejs/vite-plugin-svelte/1.4.0_svelte@3.55.0+vite@4.0.3:
     resolution: {integrity: sha512-6QupI/jemMfK+yI2pMtJcu5iO2gtgTfcBdGwMZZt+lgbFELhszbDl6Qjh000HgAV8+XUA+8EY8DusOFk8WhOIg==}
     engines: {node: ^14.18.0 || >= 16}
     peerDependencies:
@@ -1885,8 +1911,8 @@ packages:
       magic-string: 0.26.7
       svelte: 3.55.0
       svelte-hmr: 0.15.1_svelte@3.55.0
-      vite: 4.0.2_@types+node@18.11.17
-      vitefu: 0.2.4_vite@4.0.2
+      vite: 4.0.3_@types+node@18.11.17
+      vitefu: 0.2.4_vite@4.0.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2979,7 +3005,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001439
+      caniuse-lite: 1.0.30001441
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3217,7 +3243,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001439
+      caniuse-lite: 1.0.30001441
       electron-to-chromium: 1.4.284
       node-releases: 2.0.8
       update-browserslist-db: 1.0.10_browserslist@4.21.4
@@ -3406,8 +3432,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /caniuse-lite/1.0.30001439:
-    resolution: {integrity: sha512-1MgUzEkoMO6gKfXflStpYgZDlFM7M/ck/bgfVCACO5vnAf0fXoNVHdWtqGU+MYca+4bL9Z5bpOVmR33cWW9G2A==}
+  /caniuse-lite/1.0.30001441:
+    resolution: {integrity: sha512-OyxRR4Vof59I3yGWXws6i908EtGbMzVUi3ganaZQHmydk1iwDhRnvaPG2WaR0KcqrDFKrxVZHULT396LEPhXfg==}
     dev: false
 
   /capture-stack-trace/1.0.2:
@@ -8624,7 +8650,7 @@ packages:
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@netlify/build': 29.2.1_@types+node@18.11.17
+      '@netlify/build': 29.2.2_@types+node@18.11.17
       '@netlify/config': 20.2.0
       '@netlify/edge-bundler': 7.1.0
       '@netlify/framework-info': 9.5.3
@@ -10393,8 +10419,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /rollup/3.7.5:
-    resolution: {integrity: sha512-z0ZbqHBtS/et2EEUKMrAl2CoSdwN7ZPzL17UMiKN9RjjqHShTlv7F9J6ZJZJNREYjBh3TvBrdfjkFDIXFNeuiQ==}
+  /rollup/3.8.0:
+    resolution: {integrity: sha512-+UR6PnUslneJNiJfLSzy4XH6R50ZGF0MS7UCv20ftXrktF/TkvZDwiBtXX65esblLR5p8w6LmXgPwt2f2B8SoQ==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -12046,8 +12072,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /vite/4.0.2_@types+node@18.11.17:
-    resolution: {integrity: sha512-QJaY3R+tFlTagH0exVqbgkkw45B+/bXVBzF2ZD1KB5Z8RiAoiKo60vSUf6/r4c2Vh9jfGBKM4oBI9b4/1ZJYng==}
+  /vite/4.0.3_@types+node@18.11.17:
+    resolution: {integrity: sha512-HvuNv1RdE7deIfQb8mPk51UKjqptO/4RXZ5yXSAvurd5xOckwS/gg8h9Tky3uSbnjYTgUm0hVCet1cyhKd73ZA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -12075,7 +12101,7 @@ packages:
       esbuild: 0.16.10
       postcss: 8.4.20
       resolve: 1.22.1
-      rollup: 3.7.5
+      rollup: 3.8.0
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -12090,7 +12116,7 @@ packages:
       vite: 3.2.5_@types+node@18.11.17
     dev: false
 
-  /vitefu/0.2.4_vite@4.0.2:
+  /vitefu/0.2.4_vite@4.0.3:
     resolution: {integrity: sha512-fanAXjSaf9xXtOOeno8wZXIhgia+CZury481LsDaV++lSvcU2R9Ch2bPh3PYFyoHW+w9LqAeYRISVQjUIew14g==}
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0
@@ -12098,7 +12124,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.0.2_@types+node@18.11.17
+      vite: 4.0.3_@types+node@18.11.17
     dev: false
 
   /vscode-css-languageservice/6.2.1:

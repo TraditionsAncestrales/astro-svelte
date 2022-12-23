@@ -10,7 +10,7 @@ import UiTitle from './ui-title.astro';
 const {items = [], ...rest} = Astro.props;
 
 // VARS ====================================================================================================================================
-const hasSome = false;//items.length > 0;
+const hasSome = false; //items.length > 0;
 
 // TYPES ===================================================================================================================================
 export type Props = z.infer<typeof zEventItemsP>;
@@ -26,7 +26,10 @@ export type Props = z.infer<typeof zEventItemsP>;
         ))}
       </UiCarousel>
     ) : (
-      <p>Il n'y a actuellement aucun événement prévu.</p>
+      <div>
+        <p>Retrouvez bientôt ici l'ensemble de mes événements.</p>
+        <strong>Vous pouvez déjà en obtenir le programme en me faisant une demande via le formulaire de contact.</strong>
+      </div>
     )
   }
 </UiSection>

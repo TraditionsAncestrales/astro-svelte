@@ -22,7 +22,7 @@ export type Props = z.infer<typeof zEventItemsP>;
   {
     hasSome ? (
       <UiCarousel class="w-full" dates={dates}>
-        {items.map((item) => (
+        {items.sort((e1, e2) => new Date(e1.from).getTime() - new Date(e2.from).getTime()).map((item) => (
           <UiItem item={item} class="mb-2 splide__slide shadow-md" />
         ))}
       </UiCarousel>

@@ -97,7 +97,7 @@ const zEventExtra = z.object({
   features: zFeature
     .array()
     .transform((features) =>
-      features.map(({key, value}) => ({key, value: ['du', 'au'].includes(key) ? D(value).format('DD MMMM YYYY [à] HH[h]mm') : value}))
+      features.map(({key, value}) => ({key, value: ['Du', 'Au'].includes(key) ? D(value).format('DD MMMM YYYY [à] HH[h]mm') : value}))
     ),
   from: z.string(),
 });

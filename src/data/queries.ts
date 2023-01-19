@@ -21,7 +21,7 @@ export const qHrefProp = (type: PageType) => {
 export const qFeaturesProp = (type: PageType) => {
   if (['article', 'knowledge'].includes(type)) return;
   let result = `'features': [`;
-  if (type === 'event') result += `{'key': 'type', 'value': type->.title}, {'key': 'du', 'value': from}, {'key': 'au', 'value': to}`;
+  if (type === 'event') result += `{'key': 'Type', 'value': type->.title}, {'key': 'Du', 'value': from}, {'key': 'Au', 'value': to}, {'key': 'Endroits', 'value': array::join(places[]->.title, ' ou ')}`;
   else {
     result += `{'key': 'Tarif', 'value': price}`;
     if (type !== 'product')

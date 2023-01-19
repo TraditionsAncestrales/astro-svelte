@@ -38,7 +38,7 @@ export const getGeneralKnowledgeData = procedure('GENERAL KNOWLEDGE PAGE', {
   }),
   query: `${qEntry('knowledge', '$knowledge')}{
     'article': ${qEntry('article', "'la-fondatrice'")}{${qItemProps('article')}},
-    'events': ${qEntries('event')}{${qItemProps('event')}, from, to, type, url},
+    'events': ${qEntries('event')}{${qItemProps('event')}, from},
     'layout': ${qLayout('knowledge')},
     'testimonies': {
       ...${qEntries('config')}[0]{${qImageProp('testimoniesImage')}},
@@ -59,7 +59,7 @@ export const getKnowledgeData = procedure('KNOWLEDGE PAGE', {
   query: `${qEntry('page', '$knowledge')}{
     article->{${qItemProps('article')}},
     consultations[]->{${qItemProps('consultation')}},
-    'events': *[_type == 'event' && type->knowledge._ref == ^.knowledge._ref]{${qItemProps('event')}},
+    'events': *[_type == 'event' && type->knowledge._ref == ^.knowledge._ref]{${qItemProps('event')}, from},
     'layout': ${qLayout('page')},
     trainings[]->{${qItemProps('training')}},
     workshops[]->{${qItemProps('workshop')}},

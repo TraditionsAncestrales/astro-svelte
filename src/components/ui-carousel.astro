@@ -2,10 +2,10 @@
 import '@splidejs/splide/css';
 
 // STYLES ==================================================================================================================================
-const {class: cEl = '', 'class:list': classes = ''} = Astro.props;
+const {class: cEl = '', 'class:list': classes = '', dates} = Astro.props;
 ---
 
-<div class:list={['splide', cEl, classes]} role="group" aria-label="Splide Basic HTML Example">
+<div class:list={['splide', cEl, classes]} role="group" aria-label="Splide Basic HTML Example" data-dates={dates}>
   <div class="splide__track">
     <ul class="splide__list">
       <slot />
@@ -16,8 +16,11 @@ const {class: cEl = '', 'class:list': classes = ''} = Astro.props;
 <script>
   import Splide from '@splidejs/splide';
 
-  document.querySelectorAll('.splide').forEach((el) => {
-    const splide = new Splide(el as HTMLElement, {
+  document.querySelectorAll('.splide').forEach((value) => {
+    const el = value as HTMLElement;
+    const dates = el.dataset.dates ? JSON.parse(el.dataset.dates) : undefined;
+
+    const splide = new Splide(el, {
       breakpoints: {
         640: {fixedWidth: '100%'},
       },
@@ -34,6 +37,8 @@ const {class: cEl = '', 'class:list': classes = ''} = Astro.props;
     });
 
     splide.mount();
+
+    if (dates) splide.remove(({slide: {dataset}}) => new Date(dates[dataset.slug as string]).getTime() < Date.now());
   });
 </script>
 

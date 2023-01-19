@@ -1,7 +1,11 @@
+import D from 'dayjs';
+import 'dayjs/locale/fr';
 import {z} from 'zod';
 import {banNull, fill} from '~/data/utils';
 import {fillString, parseFormDataValue} from '~/server/utils';
 import {zSanityBlock, zSanityImage, zSanityImageMetadata, zSanityReference} from './sanity';
+
+D.locale('fr');
 
 // ENUMS ===================================================================================================================================
 export const formTypes = ['fail', 'success', 'unnormalized', 'unsanitized'] as const;
@@ -89,7 +93,15 @@ export const zConsultation = zEntry.merge(zConsultationExtra);
 export const zConsultationItem = zItem.merge(zConsultationExtra);
 
 // EVENT ===================================================================================================================================
-export const zEvent = zItem.extend({});
+const zEventExtra = z.object({
+  features: zFeature
+    .array()
+    .transform((features) =>
+      features.map(({key, value}) => ({key, value: ['du', 'au'].includes(key) ? D(value).format('DD MMMM YYYY [à] HH[h]mm') : value}))
+    ),
+  from: z.string(),
+});
+export const zEvent = zItem.merge(zEventExtra);
 
 // KNOWLEDGE ===============================================================================================================================
 export const zKnowledge = zItem;

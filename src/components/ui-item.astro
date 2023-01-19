@@ -11,7 +11,7 @@ import UiText from "./ui-text.astro";
 const {item} = Astro.props;
 
 // VARS ====================================================================================================================================
-const {excerpt, features, href, image, title} = item;
+const {excerpt, features, href, image, slug, title} = item;
 
 // STYLES ==================================================================================================================================
 const {class: cEl = '', 'class:list': classes = ''} = Astro.props;
@@ -20,7 +20,7 @@ const {class: cEl = '', 'class:list': classes = ''} = Astro.props;
 export type Props = z.infer<typeof zUiItemP>;
 ---
 
-<li class:list={['bg-white flex flex-col', cEl, classes]}>
+<li class:list={['bg-white flex flex-col', cEl, classes]} data-slug={slug}>
 	<UiImg image={image} widths={[384]} ratio={3/2} sizes="24rem" fit="cover" class="flex-none relative" cImg="aspect-[3/2]" />
 	<div class="flex-1 flex flex-col gap-4 p-4 px-6 sm:px-8">
 		<h4 class:list={TITLE()}>{title}</h4>

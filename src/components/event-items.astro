@@ -10,7 +10,8 @@ import UiTitle from './ui-title.astro';
 const {items = [], ...rest} = Astro.props;
 
 // VARS ====================================================================================================================================
-const hasSome = false; //items.length > 0;
+const hasSome = items.length > 0;
+const dates = JSON.stringify(Object.fromEntries(items.map(({from, slug}) => [slug, from])));
 
 // TYPES ===================================================================================================================================
 export type Props = z.infer<typeof zEventItemsP>;
@@ -20,7 +21,7 @@ export type Props = z.infer<typeof zEventItemsP>;
   <UiTitle slot="header" title="Événements" class="mb-8" />
   {
     hasSome ? (
-      <UiCarousel class="w-full">
+      <UiCarousel class="w-full" dates={dates}>
         {items.map((item) => (
           <UiItem item={item} class="mb-2 splide__slide shadow-md" />
         ))}

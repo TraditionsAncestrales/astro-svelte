@@ -1,11 +1,13 @@
 import D from 'dayjs';
 import 'dayjs/locale/fr';
+import utc from 'dayjs/plugin/utc';
 import {z} from 'zod';
 import {banNull, fill} from '~/data/utils';
 import {fillString, parseFormDataValue} from '~/server/utils';
 import {zSanityBlock, zSanityImage, zSanityImageMetadata, zSanityReference} from './sanity';
 
 D.locale('fr');
+D.extend(utc);
 
 // ENUMS ===================================================================================================================================
 export const formTypes = ['fail', 'success', 'unnormalized', 'unsanitized'] as const;
@@ -97,7 +99,10 @@ const zEventExtra = z.object({
   features: zFeature
     .array()
     .transform((features) =>
-      features.map(({key, value}) => ({key, value: ['Du', 'Au'].includes(key) ? D(value).format('DD MMMM YYYY [à] HH[h]mm') : value}))
+      features.map(({key, value}) => ({
+        key,
+        value: ['Du', 'Au'].includes(key) ? D(value).local().format('DD MMMM YYYY [à] HH[h]mm') : value,
+      }))
     ),
   from: z.string(),
 });

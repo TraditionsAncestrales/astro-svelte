@@ -30,7 +30,7 @@ export const itemFromEvent = allowUndefined(strictItemFromEvent);
 
 // IMAGE ***********************************************************************************************************************************
 function strictImageFrom({ alt, height, id, src, width }: ImageForEntry) {
-  return { alt, aspectRatio: width / height, src: `${PUBLIC_IMGIX_URL}/${id}/${src}` };
+  return { alt, height, src: `${PUBLIC_IMGIX_URL}/${id}/${src}`, width };
 }
 export const imageFrom = allowUndefined(strictImageFrom);
 
@@ -134,7 +134,7 @@ export function pathFromService(service: ServiceForRoute) {
 }
 
 // TYPES ***********************************************************************************************************************************
-export type Image = NonNullable<ReturnType<typeof imageFrom>>;
+export type Image = NonNullable<ReturnType<typeof strictImageFrom>>;
 
 type EventForItem = Pick<EventsRecord, "excerpt" | "from" | "name" | "slug" | "to" | "url"> & {
   image: ImageForEntry;

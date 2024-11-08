@@ -15,10 +15,10 @@ export type FeaturesProps = Props;
 
 <dl class={cn("w-full p-4", intent === "white" ? "bg-primary-200" : "bg-white/25", className)}>
   {
-    features.map(({ key, value }) => (
+    features.map(({ href, key, value }) => (
       <div class="flex gap-2">
         <dd class="flex-none font-bold">{key} :</dd>
-        <dt>{value}</dt>
+        <dt>{href ? <a {href}>{value}</a> : value}</dt>
       </div>
     ))
   }

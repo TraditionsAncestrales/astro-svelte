@@ -19,7 +19,7 @@ export function allowUndefined<FROM, TO>(method: (defined: FROM) => TO) {
 function strictItemFromEvent(event: EventForItem) {
   const { excerpt: text, from, image, name: title, places, service, slug, to, url: href } = event;
   const features = [
-    { key: "Type", value: service.name },
+    { href: hrefFromService(service), key: "Type", value: service.name },
     { key: "Du", value: format({ date: from, format: { date: "full", time: "short" }, locale: "fr", tz: "Indian/Reunion" }) },
     { key: "Au", value: format({ date: to, format: { date: "full", time: "short" }, locale: "fr", tz: "Indian/Reunion" }) },
     { key: "Endroits", value: places.map(({ name }) => name).join(" ou ") },
@@ -139,7 +139,7 @@ export type Image = NonNullable<ReturnType<typeof strictImageFrom>>;
 type EventForItem = Pick<EventsRecord, "excerpt" | "from" | "name" | "slug" | "to" | "url"> & {
   image: ImageForEntry;
   places: Pick<PlacesRecord, "name">[];
-  service: Pick<ServicesRecord, "name">;
+  service: Pick<ServicesRecord, "name"> & ServiceForRoute;
 };
 type ImageForEntry = Pick<ImagesRecord, "alt" | "height" | "id" | "src" | "width">;
 type KnowledgeForItem = KnowledgeForRoute & Pick<KnowledgesRecord, "name" | "text"> & { image: ImageForEntry };
@@ -156,6 +156,7 @@ type ServiceForItem = ServiceForFeatures & ServiceForRoute & Pick<ServicesRecord
 type ServiceForRoute = ServiceForFragment & Pick<ServicesRecord, "slug"> & { knowledge: KnowledgeForRoute };
 
 export type Feature = {
+  href?: string;
   key: string;
   value: string;
 };

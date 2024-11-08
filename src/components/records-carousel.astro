@@ -29,7 +29,7 @@ export type CarouselProps = Props;
               <div class="flex flex-1 flex-col gap-4 p-4 px-6 sm:px-8">
                 <h4 class={TITLE()}>{title}</h4>
                 <Features {features} intent="white" />
-                <article set:html={text} class="prose" />
+                <article set:html={text} class="prose prose-p:my-1 prose-p:leading-normal" />
                 <div class="flex-1" />
                 <a {href} {target} class={BUTTON({ className: "self-end" })}>
                   En savoir plus

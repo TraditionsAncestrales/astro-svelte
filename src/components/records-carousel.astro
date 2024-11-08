@@ -7,11 +7,14 @@ import { BUTTON } from "./ui/button";
 import Features from "./ui/features.astro";
 import { TITLE } from "@/styles/ui";
 
-// PROPS *********************************************************************************************************************************
-const { class: className, items, removeStale = false } = Astro.props;
+// PROPS ***********************************************************************************************************************************
+const { class: className, externalLink = false, items, removeStale = false } = Astro.props;
 
-// TYPES *********************************************************************************************************************************
-type Props = { class?: string; items: Item[]; removeStale?: boolean };
+// VARS ************************************************************************************************************************************
+const target = externalLink ? "_blank" : "_self";
+
+// TYPES ***********************************************************************************************************************************
+type Props = { class?: string; items: Item[]; externalLink?: boolean; removeStale?: boolean };
 export type CarouselProps = Props;
 ---
 
@@ -28,7 +31,7 @@ export type CarouselProps = Props;
                 <Features {features} intent="white" />
                 <article set:html={text} />
                 <div class="flex-1" />
-                <a {href} class={BUTTON({ className: "self-end" })}>
+                <a {href} {target} class={BUTTON({ className: "self-end" })}>
                   En savoir plus
                 </a>
               </div>

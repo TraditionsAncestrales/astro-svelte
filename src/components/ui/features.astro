@@ -18,7 +18,15 @@ export type FeaturesProps = Props;
     features.map(({ href, key, value }) => (
       <div class="flex gap-2">
         <dd class="flex-none font-bold">{key} :</dd>
-        <dt>{href ? <a {href}>{value}</a> : value}</dt>
+        <dt>
+          {href ? (
+            <a {href} class="hover:underline">
+              {value}
+            </a>
+          ) : (
+            value
+          )}
+        </dt>
       </div>
     ))
   }

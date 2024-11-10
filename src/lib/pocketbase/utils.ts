@@ -30,7 +30,7 @@ export const itemFromEvent = allowUndefined(strictItemFromEvent);
 
 // IMAGE ***********************************************************************************************************************************
 function strictImageFrom({ alt, height, id, src, width }: ImageForEntry) {
-  return { alt, height, src: `${PUBLIC_IMGIX_URL}/${id}/${src}`, width };
+  return { alt, height, src: `${PUBLIC_IMGIX_URL}/${id}/${src}?q=50`, width };
 }
 export const imageFrom = allowUndefined(strictImageFrom);
 

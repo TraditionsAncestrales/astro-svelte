@@ -10,7 +10,6 @@ import { defineConfig, envField } from "astro/config";
 import { pascalCase } from "es-toolkit";
 import { FontaineTransform } from "fontaine";
 import simpleStackQuery from "simple-stack-query";
-import { purgeCss } from "vite-plugin-tailwind-purgecss";
 
 // https://astro.build/config
 export default defineConfig({
@@ -52,7 +51,6 @@ export default defineConfig({
         fallbacks: ["Arial"],
         resolvePath: (id) => new URL(id.startsWith("/") ? `public/${id.slice(1)}` : `node_modules/${id}`, import.meta.url),
       }),
-      purgeCss(),
     ],
   },
 

@@ -25,7 +25,7 @@ const { consultations, events, post, testimonies, trainings, workshops } = await
 });
 
 // VARS ************************************************************************************************************************************
-const seo = { title: knowledge === "traditions-ancestrales" ? undefined : post.title, description: post.text };
+const seo = { title: knowledge === "traditions-ancestrales" ? undefined : post.title };
 const count = +(consultations.length > 0) + +(workshops.length > 0) + +(trainings.length > 0);
 const eventIntent = count > 0 ? "primary" : "light";
 

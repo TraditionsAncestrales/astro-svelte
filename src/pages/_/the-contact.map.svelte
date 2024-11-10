@@ -14,9 +14,8 @@
   // ACTIONS *******************************************************************************************************************************
   export function setMap(mapElement: HTMLElement, { lat, lng, zoom }: SetMapOpts) {
     (async () => {
-      const { default: css } = await import("leaflet/dist/leaflet.css?url");
+      const [L, { default: css }] = await Promise.all([await import("leaflet"), import("leaflet/dist/leaflet.css?url")]);
       leafletCss = css;
-      const L = await import("leaflet");
 
       const map = L.map(mapElement).setView([lat, lng], zoom);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);

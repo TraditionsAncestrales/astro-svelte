@@ -2,7 +2,7 @@
 import { BUTTON } from "@/components/ui/button";
 import Section from "@/components/ui/section.astro";
 import Title from "@/components/ui/title.astro";
-import type { Item } from "@/lib/pocketbase/utils";
+import { imageFrom, type Item } from "@/lib/pocketbase/utils";
 import { cn } from "@/lib/utils";
 import { Image } from "@unpic/astro";
 
@@ -27,7 +27,7 @@ export type KnowledgesItemsProps = Props;
           <Title slot="header" text={title} class="mb-8" />
           <Image
             slot="aside"
-            {...image}
+            {...imageFrom(image)}
             breakpoints={[320, 640, 960, 1280, 1600, 1920]}
             sizes="(min-width: 768px) 20rem, calc(100vw - 7rem - 15px)"
             class="relative aspect-[3/2] shadow-lg shadow-black/50"
@@ -43,7 +43,7 @@ export type KnowledgesItemsProps = Props;
           class="group/k relative hidden h-[600px] w-1/4 flex-col items-center justify-center overflow-hidden lg:flex"
           data-theme={slug}
         >
-          <Image {...image} breakpoints={[320, 640, 960, 1280]} sizes="25vw" class={cn(cAbs, "-z-20 group-hover/k:scale-105")} />
+          <Image {...imageFrom(image)} breakpoints={[320, 640, 960, 1280]} sizes="25vw" class={cn(cAbs, "-z-20 group-hover/k:scale-105")} />
           <div class={cn(cAbs, "-z-10 translate-y-full bg-primary group-hover/k:translate-y-0")}>
             <div class="mt-[150px] px-4 text-center">
               <article set:html={text} />

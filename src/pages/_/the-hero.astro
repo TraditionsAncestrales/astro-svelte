@@ -1,5 +1,5 @@
 ---
-import type { Image as ImageData } from "@/lib/pocketbase/utils";
+import { imageFrom, type ImageData } from "@/lib/pocketbase/utils";
 import { cn } from "@/lib/utils";
 import { Image } from "@unpic/astro";
 import type { ClassValue } from "tailwind-variants";
@@ -16,7 +16,7 @@ export type HeroProps = Props;
 ---
 
 <div class={cn("w-full flex items-center justify-center bg-cover bg-center font-bold relative", className)}>
-  <Image {...image} priority sizes="100vw" class="absolute inset-0 h-full !max-h-none w-full !max-w-none" />
+  <Image {...imageFrom(image)} priority sizes="100vw" class="absolute inset-0 h-full !max-h-none w-full !max-w-none" />
   <div class="relative py-40 text-center uppercase tracking-widest text-white">
     <div class={cn("absolute inset-0 bg-primary", cMask)}></div>
     <h1 class="relative my-2 max-w-2xl text-4xl sm:text-7xl">{title}</h1>

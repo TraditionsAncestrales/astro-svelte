@@ -5,14 +5,17 @@
 </script>
 
 <script lang="ts">
-  import leafletCss from "leaflet/dist/leaflet.css?url";
-
   // PROPS *********************************************************************************************************************************
   let { class: className, options }: TheContactMapProps = $props();
 
+  // VARS **********************************************************************************************************************************
+  let leafletCss = $state<string>();
+
+  // ACTIONS *******************************************************************************************************************************
   export function setMap(mapElement: HTMLElement, { lat, lng, zoom }: SetMapOpts) {
     (async () => {
-      // await import("leaflet/dist/leaflet.css");
+      const { default: css } = await import("leaflet/dist/leaflet.css?url");
+      leafletCss = css;
       const L = await import("leaflet");
 
       const map = L.map(mapElement).setView([lat, lng], zoom);
@@ -31,5 +34,5 @@
   }
 </script>
 
-<link rel="stylesheet" href={leafletCss} />
+{#if leafletCss}<link rel="stylesheet" href={leafletCss} />{/if}
 <figure use:setMap={options} class={className}></figure>

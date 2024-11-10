@@ -1,8 +1,8 @@
 ---
 import Section, { type SectionProps } from "@/components/ui/section.astro";
 import Title from "@/components/ui/title.astro";
-import type { ImagesRecord, TestimoniesRecord } from "@/lib/pocketbase/schemas";
-import { imageFrom } from "@/lib/pocketbase/utils";
+import type { TestimoniesRecord } from "@/lib/pocketbase/schemas";
+import { imageFrom, type ImageData } from "@/lib/pocketbase/utils";
 import { Image } from "@unpic/astro";
 import TestimoniesItems from "./testimonies-items.svelte";
 
@@ -11,7 +11,7 @@ const { image, items, ...rest } = Astro.props;
 if (items.length === 0) return;
 
 // TYPES ***********************************************************************************************************************************
-type Props = SectionProps & { image?: ImagesRecord; items: Pick<TestimoniesRecord, "author" | "text" | "title">[] };
+type Props = SectionProps & { image?: ImageData; items: Pick<TestimoniesRecord, "author" | "text" | "title">[] };
 export type TheTestimoniesProps = Props;
 ---
 

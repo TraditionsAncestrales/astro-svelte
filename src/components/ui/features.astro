@@ -13,7 +13,7 @@ type Props = { class?: ClassValue; features?: Feature[]; intent?: Intent };
 export type FeaturesProps = Props;
 ---
 
-<dl class={cn("w-full p-4", intent === "white" ? "bg-primary-200" : "bg-white/25", className)}>
+<dl class={cn("w-full p-4", intent === "white" ? "bg-primary/20" : "bg-white/25", className)}>
   {
     features.map(({ href, key, value }) => (
       <div class="flex gap-2">

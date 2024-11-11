@@ -1,5 +1,5 @@
 ---
-import { imageFrom, type Item } from "@/lib/pocketbase/utils";
+import type { Item } from "@/lib/pocketbase/utils";
 import { Image } from "@unpic/astro";
 import RecordsCarousel from "./records-carousel.astro";
 import { BUTTON } from "./ui/button";
@@ -37,13 +37,7 @@ export type TrainingsItemsProps = Props;
   isSingle && !forceMultiple ? (
     <Section {intent} {...rest}>
       <Title slot="header" text={title} class="mb-8 xl:hidden" />
-      <Image
-        slot="aside"
-        {...imageFrom(image)}
-        breakpoints={[320, 640, 960, 1280, 1600]}
-        {sizes}
-        class="relative shadow-lg shadow-black/50"
-      />
+      <Image slot="aside" {...image} breakpoints={[320, 640, 960, 1280, 1600]} {sizes} class="relative shadow-lg shadow-black/50" />
       <Title text={title} class="hidden self-start xl:inline-flex" />
       <Features {intent} {features} />
       <article set:html={text} />

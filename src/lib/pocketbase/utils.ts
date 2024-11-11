@@ -24,19 +24,20 @@ function strictItemFromEvent(event: EventForItem) {
     { key: "Au", value: format({ date: to, format: { date: "full", time: "short" }, locale: "fr", tz: "Indian/Reunion" }) },
     { key: "Endroits", value: places.map(({ name }) => name).join(" ou ") },
   ];
-  return { features, href, image, slug, stale: to.toISOString(), text, title };
+  return { features, href, image: imageFrom(image), slug, stale: to.toISOString(), text, title };
 }
 export const itemFromEvent = allowUndefined(strictItemFromEvent);
 
 // IMAGE ***********************************************************************************************************************************
-export function imageFrom({ alt, height, id, src, width }: ImageData) {
+export function strictImageFrom({ alt, height, id, src, width }: Image) {
   return { alt, height, src: `${PUBLIC_IMGIX_URL}/${id}/${src}?q=50`, width };
 }
+export const imageFrom = allowUndefined(strictImageFrom);
 
 // KNOWLEDGE *******************************************************************************************************************************
 function strictItemFromKnowledge(knowledge: KnowledgeForItem) {
   const { image, name: title, slug, text } = knowledge;
-  return { href: hrefFromKnowledge(knowledge).slice(0, -1), image, slug, text, title };
+  return { href: hrefFromKnowledge(knowledge).slice(0, -1), image: imageFrom(image), slug, text, title };
 }
 export const itemFromKnowledge = allowUndefined(strictItemFromKnowledge);
 
@@ -59,14 +60,14 @@ export function pathFromKnowledge(knowledge: KnowledgeForRoute) {
 // POST ************************************************************************************************************************************
 function strictSingleFromPost(post: PostForSingle) {
   const { image, text, title } = post;
-  return { features: [], image, text, title };
+  return { features: [], image: imageFrom(image), text, title };
 }
 export const singleFromPost = allowUndefined(strictSingleFromPost);
 
 function strictItemFromPost(post: PostForItem) {
   const { excerpt: text, image, slug, title } = post;
   if (!image) throw new Error(`Post ${slug} has no image`);
-  return { href: hrefFromPost(post), image, slug, text, title };
+  return { href: hrefFromPost(post), image: imageFrom(image), slug, text, title };
 }
 export const itemFromPost = allowUndefined(strictItemFromPost);
 
@@ -86,7 +87,7 @@ export function pathFromPost(post: PostForRoute) {
 function strictItemFromProduct(product: ProductForItem) {
   const { excerpt: text, image, name: title, slug, url: href } = product;
   if (!image) throw new Error(`Product ${slug} has no image`);
-  return { features: featuresFromProduct(product), href, image, slug, text, title };
+  return { features: featuresFromProduct(product), href, image: imageFrom(image), slug, text, title };
 }
 export const itemFromProduct = allowUndefined(strictItemFromProduct);
 
@@ -104,7 +105,7 @@ export const singleFromService = allowUndefined(strictSingleFromService);
 function strictItemFromService(service: ServiceForItem) {
   const { category, excerpt: text, image, name: title, slug } = service;
   const features = featuresFromService(service);
-  return { extra: { category }, features, href: hrefFromService(service), image, slug, text, title };
+  return { extra: { category }, features, href: hrefFromService(service), image: imageFrom(image), slug, text, title };
 }
 export const itemFromService = allowUndefined(strictItemFromService);
 
@@ -133,25 +134,25 @@ export function pathFromService(service: ServiceForRoute) {
 }
 
 // TYPES ***********************************************************************************************************************************
-export type ImageData = Pick<ImagesRecord, "alt" | "height" | "id" | "src" | "width">;
+export type Image = Pick<ImagesRecord, "alt" | "height" | "id" | "src" | "width">;
 
 type EventForItem = Pick<EventsRecord, "excerpt" | "from" | "name" | "slug" | "to" | "url"> & {
-  image: ImageData;
+  image: Image;
   places: Pick<PlacesRecord, "name">[];
   service: Pick<ServicesRecord, "name"> & ServiceForRoute;
 };
 
-type KnowledgeForItem = KnowledgeForRoute & Pick<KnowledgesRecord, "name" | "text"> & { image: ImageData };
+type KnowledgeForItem = KnowledgeForRoute & Pick<KnowledgesRecord, "name" | "text"> & { image: Image };
 type KnowledgeForRoute = Pick<KnowledgesRecord, "slug">;
-type PostForSingle = Pick<PostsRecord, "text" | "title"> & { image?: ImageData };
-type PostForItem = PostForRoute & Pick<PostsRecord, "excerpt" | "title"> & { image?: ImageData };
+type PostForSingle = Pick<PostsRecord, "text" | "title"> & { image?: Image };
+type PostForItem = PostForRoute & Pick<PostsRecord, "excerpt" | "title"> & { image?: Image };
 type PostForRoute = Pick<PostsRecord, "slug"> & { knowledge: KnowledgeForRoute };
 type ProductForFeatures = Pick<ProductsRecord, "price">;
-type ProductForItem = ProductForFeatures & Pick<ProductsRecord, "excerpt" | "name" | "slug" | "url"> & { image: ImageData };
-type ServiceForSingle = ServiceForFeatures & Pick<ServicesRecord, "name" | "text"> & { image: ImageData };
+type ProductForItem = ProductForFeatures & Pick<ProductsRecord, "excerpt" | "name" | "slug" | "url"> & { image: Image };
+type ServiceForSingle = ServiceForFeatures & Pick<ServicesRecord, "name" | "text"> & { image: Image };
 type ServiceForFeatures = Pick<ServicesRecord, "price" | "duration"> & { places: Pick<PlacesRecord, "name">[] };
 type ServiceForFragment = Pick<ServicesRecord, "category">;
-type ServiceForItem = ServiceForFeatures & ServiceForRoute & Pick<ServicesRecord, "excerpt" | "name"> & { image: ImageData };
+type ServiceForItem = ServiceForFeatures & ServiceForRoute & Pick<ServicesRecord, "excerpt" | "name"> & { image: Image };
 type ServiceForRoute = ServiceForFragment & Pick<ServicesRecord, "slug"> & { knowledge: KnowledgeForRoute };
 
 export type Feature = {
@@ -165,7 +166,7 @@ export type Extra = Record<string, unknown> | undefined;
 type StrictItem = {
   features?: Feature[];
   href: string;
-  image: ImageData;
+  image: Image;
   slug: string;
   stale?: string;
   text: string;

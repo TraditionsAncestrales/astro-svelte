@@ -29,7 +29,7 @@ function strictItemFromEvent(event: EventForItem) {
 export const itemFromEvent = allowUndefined(strictItemFromEvent);
 
 // IMAGE ***********************************************************************************************************************************
-export function strictImageFrom({ alt, height, id, src, width }: Image) {
+export function strictImageFrom({ alt, height, id, src, width }: ImageForEntry) {
   return { alt, height, src: `${PUBLIC_IMGIX_URL}/${id}/${src}?q=50`, width };
 }
 export const imageFrom = allowUndefined(strictImageFrom);
@@ -134,25 +134,26 @@ export function pathFromService(service: ServiceForRoute) {
 }
 
 // TYPES ***********************************************************************************************************************************
-export type Image = Pick<ImagesRecord, "alt" | "height" | "id" | "src" | "width">;
+export type Image = Awaited<NonNullable<ReturnType<typeof strictImageFrom>>>;
 
 type EventForItem = Pick<EventsRecord, "excerpt" | "from" | "name" | "slug" | "to" | "url"> & {
-  image: Image;
+  image: ImageForEntry;
   places: Pick<PlacesRecord, "name">[];
   service: Pick<ServicesRecord, "name"> & ServiceForRoute;
 };
 
-type KnowledgeForItem = KnowledgeForRoute & Pick<KnowledgesRecord, "name" | "text"> & { image: Image };
+type ImageForEntry = Pick<ImagesRecord, "alt" | "height" | "id" | "src" | "width">;
+type KnowledgeForItem = KnowledgeForRoute & Pick<KnowledgesRecord, "name" | "text"> & { image: ImageForEntry };
 type KnowledgeForRoute = Pick<KnowledgesRecord, "slug">;
-type PostForSingle = Pick<PostsRecord, "text" | "title"> & { image?: Image };
-type PostForItem = PostForRoute & Pick<PostsRecord, "excerpt" | "title"> & { image?: Image };
+type PostForSingle = Pick<PostsRecord, "text" | "title"> & { image?: ImageForEntry };
+type PostForItem = PostForRoute & Pick<PostsRecord, "excerpt" | "title"> & { image?: ImageForEntry };
 type PostForRoute = Pick<PostsRecord, "slug"> & { knowledge: KnowledgeForRoute };
 type ProductForFeatures = Pick<ProductsRecord, "price">;
-type ProductForItem = ProductForFeatures & Pick<ProductsRecord, "excerpt" | "name" | "slug" | "url"> & { image: Image };
-type ServiceForSingle = ServiceForFeatures & Pick<ServicesRecord, "name" | "text"> & { image: Image };
+type ProductForItem = ProductForFeatures & Pick<ProductsRecord, "excerpt" | "name" | "slug" | "url"> & { image: ImageForEntry };
+type ServiceForSingle = ServiceForFeatures & Pick<ServicesRecord, "name" | "text"> & { image: ImageForEntry };
 type ServiceForFeatures = Pick<ServicesRecord, "price" | "duration"> & { places: Pick<PlacesRecord, "name">[] };
 type ServiceForFragment = Pick<ServicesRecord, "category">;
-type ServiceForItem = ServiceForFeatures & ServiceForRoute & Pick<ServicesRecord, "excerpt" | "name"> & { image: Image };
+type ServiceForItem = ServiceForFeatures & ServiceForRoute & Pick<ServicesRecord, "excerpt" | "name"> & { image: ImageForEntry };
 type ServiceForRoute = ServiceForFragment & Pick<ServicesRecord, "slug"> & { knowledge: KnowledgeForRoute };
 
 export type Feature = {

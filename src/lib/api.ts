@@ -10,6 +10,7 @@ import {
   entryFromKnowledge,
   entryFromPost,
   entryFromService,
+  imageFrom,
   itemFromEvent,
   itemFromKnowledge,
   itemFromPost,
@@ -59,7 +60,7 @@ export async function getKnowledgePage(knowledge: string | undefined, opts: Help
   const trainings = services.filter(({ extra: { category } }) => category === "training");
   const workshops = services.filter(({ extra: { category } }) => category === "workshop");
   const consultations = services.filter(({ extra: { category } }) => category === "consult");
-  const testimonies = { image: page.testimoniesImage, items: data.testimonies };
+  const testimonies = { image: imageFrom(page.testimoniesImage), items: data.testimonies };
   return { consultations, events, post, testimonies, trainings, workshops };
 }
 

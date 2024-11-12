@@ -49,10 +49,12 @@
 
 <form method="POST" action={actions.subscribeToNewsletter} use:enhance novalidate class={FORM({ className })}>
   <Form.Field form={sf} name="email" class="w-full sm:max-w-xs xl:max-w-sm">
-    <Form.Control let:attrs>
-      <Input {...attrs} type="email" placeholder="Votre courriel..." bind:value={$form.email} class={INPUT} />
+    <Form.Control>
+      {#snippet children({ props })}
+        <Input {...props} type="email" placeholder="Votre courriel..." bind:value={$form.email} class={INPUT} />
+      {/snippet}
     </Form.Control>
-    <Form.FieldErrors class="text-destructive-400 absolute" />
+    <Form.FieldErrors class="absolute text-destructive-400" />
   </Form.Field>
   <Form.Button disabled={$submitting} intent="secondary" class="mt-4 w-full justify-center sm:mt-0 sm:w-auto">
     {#if $delayed}{@render submittingIcon?.()}{:else}{@render submitIcon?.()}{/if}

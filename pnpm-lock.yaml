@@ -90,8 +90,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0(encoding@0.1.13)(webpack-sources@3.2.3)
       formsnap:
-        specifier: ^1.0.1
-        version: 1.0.1(svelte@5.1.15)(sveltekit-superforms@2.20.0(@sveltejs/kit@2.8.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(@types/json-schema@7.0.15)(svelte@5.1.15)(typescript@5.6.3))
+        specifier: 2.0.0-next.1
+        version: 2.0.0-next.1(svelte@5.1.15)(sveltekit-superforms@2.20.0(@sveltejs/kit@2.8.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(@types/json-schema@7.0.15)(svelte@5.1.15)(typescript@5.6.3))
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -2327,11 +2327,12 @@ packages:
     resolution: {integrity: sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==}
     deprecated: 'Please upgrade to latest, formidable@v2 or formidable@v3! Check these notes: https://bit.ly/2ZEqIau'
 
-  formsnap@1.0.1:
-    resolution: {integrity: sha512-TvU9CoLSiacW1c7wXhLiyVpyy/LBfG0CEFDbs3M3jrsxBSrkTpsuhbQ8JYKY3CNCmIhZlgxCH+Vqr7RBF9G53w==}
+  formsnap@2.0.0-next.1:
+    resolution: {integrity: sha512-ha8r9eMmsGEGMY+ljV3FEyTtB72E7dt95y9HHUbCcaDnjbz3Q6n00BHLz7dfBZ9rqyaMeIO200EmP1IcYMExeg==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0-next.1
-      sveltekit-superforms: ^2.3.0
+      svelte: ^5.0.0
+      sveltekit-superforms: ^2.19.0
 
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
@@ -3164,11 +3165,6 @@ packages:
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-
-  nanoid@5.0.8:
-    resolution: {integrity: sha512-TcJPw+9RV9dibz1hHUzlLVy8N4X9TnwirAjrU08Juo6BNKggzVfP2ZJ/3ZUSq15Xl5i85i+Z89XBO90pB2PghQ==}
-    engines: {node: ^18 || >=20}
     hasBin: true
 
   natural-compare@1.4.0:
@@ -7363,10 +7359,10 @@ snapshots:
 
   formidable@1.2.6: {}
 
-  formsnap@1.0.1(svelte@5.1.15)(sveltekit-superforms@2.20.0(@sveltejs/kit@2.8.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(@types/json-schema@7.0.15)(svelte@5.1.15)(typescript@5.6.3)):
+  formsnap@2.0.0-next.1(svelte@5.1.15)(sveltekit-superforms@2.20.0(@sveltejs/kit@2.8.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(@types/json-schema@7.0.15)(svelte@5.1.15)(typescript@5.6.3)):
     dependencies:
-      nanoid: 5.0.8
       svelte: 5.1.15
+      svelte-toolbelt: 0.4.6(svelte@5.1.15)
       sveltekit-superforms: 2.20.0(@sveltejs/kit@2.8.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(svelte@5.1.15)(vite@6.0.0-beta.6(@types/node@22.9.0)(jiti@2.4.0)(yaml@2.6.0)))(@types/json-schema@7.0.15)(svelte@5.1.15)(typescript@5.6.3)
 
   fraction.js@4.3.7: {}
@@ -8413,8 +8409,6 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.7: {}
-
-  nanoid@5.0.8: {}
 
   natural-compare@1.4.0: {}
 

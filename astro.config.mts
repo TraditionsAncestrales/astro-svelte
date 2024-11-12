@@ -30,7 +30,7 @@ export default defineConfig({
     svelte(),
     icon({
       include: {
-        bi: ["envelope-plus", "phone", "pin-map"],
+        bi: ["chevron-left", "chevron-right", "envelope-plus", "phone", "pin-map"],
         ph: ["at", "facebook-logo-thin", "instagram-logo-thin", "list", "youtube-logo-thin"],
       },
     }),

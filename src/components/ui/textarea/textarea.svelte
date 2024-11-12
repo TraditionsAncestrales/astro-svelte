@@ -1,23 +1,22 @@
-<script lang="ts" module>
-  // TYPES *********************************************************************************************************************************
-  export type TextareaProps = Omit<HTMLTextareaAttributes, "value"> & { value?: string };
-
-  // STYLES ********************************************************************************************************************************
-  export const TEXTAREA = tv({
-    base: `flex min-h-[80px] w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background 
-    placeholder:text-muted-foreground 
-    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 
-    disabled:cursor-not-allowed disabled:opacity-50
-    aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive`,
-  });
-</script>
-
 <script lang="ts">
+  import { cn } from "@/lib/utils.js";
+  import type { WithElementRef, WithoutChildren } from "bits-ui";
   import type { HTMLTextareaAttributes } from "svelte/elements";
-  import { tv } from "tailwind-variants";
 
-  // PROPS *********************************************************************************************************************************
-  let { class: className, value = $bindable(), ...rest }: TextareaProps = $props();
+  let {
+    ref = $bindable(null),
+    value = $bindable(),
+    class: className,
+    ...restProps
+  }: WithoutChildren<WithElementRef<HTMLTextareaAttributes>> = $props();
 </script>
 
-<textarea bind:value class={TEXTAREA({ className })} {...rest}></textarea>
+<textarea
+  bind:this={ref}
+  class={cn(
+    "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+    className,
+  )}
+  bind:value
+  {...restProps}
+></textarea>

@@ -1,14 +1,7 @@
-<script lang="ts" module>
-  // TYPES *********************************************************************************************************************************
-  export type FormButtonProps = Button.ButtonProps;
-</script>
-
 <script lang="ts">
-  import * as Button from "@/components/ui/button";
+  import * as Button from "@/components/ui/button/index.js";
 
-  let { children, ...rest }: FormButtonProps = $props();
+  let { ref = $bindable(null), ...restProps }: Button.Props = $props();
 </script>
 
-<Button.Root type="submit" {...rest}>
-  {@render children?.()}
-</Button.Root>
+<Button.Root bind:ref type="submit" {...restProps} />

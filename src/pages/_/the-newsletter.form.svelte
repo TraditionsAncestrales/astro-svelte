@@ -23,7 +23,6 @@
 <script lang="ts">
   import * as Form from "@/components/ui/form";
   import { Input } from "@/components/ui/input";
-  import { Toaster } from "@/components/ui/sonner";
   import { zNewsletterValues, type Message, type NewsletterValues } from "@/lib/utils";
   import { actions } from "astro:actions";
   import type { Snippet } from "svelte";
@@ -62,4 +61,3 @@
     Je m'inscris
   </Form.Button>
 </form>
-<Toaster richColors theme="light" />

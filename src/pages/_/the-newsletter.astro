@@ -1,5 +1,6 @@
 ---
 import Section from "@/components/ui/section.astro";
+import { Toaster } from "@/components/ui/sonner";
 import Title from "@/components/ui/title.astro";
 import { zNewsletterValues } from "@/lib/utils";
 import { Icon } from "astro-icon/components";
@@ -26,3 +27,4 @@ const sv = await superValidate(Astro.request, zod(zNewsletterValues));
     </Form>
   </div>
 </Section>
+<Toaster client:visible richColors theme="light" />

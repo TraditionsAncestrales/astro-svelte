@@ -37,7 +37,8 @@ export const imageFrom = allowUndefined(strictImageFrom);
 // KNOWLEDGE *******************************************************************************************************************************
 function strictItemFromKnowledge(knowledge: KnowledgeForItem) {
   const { image, name: title, slug, text } = knowledge;
-  return { href: hrefFromKnowledge(knowledge).slice(0, -1), image: imageFrom(image), slug, text, title };
+  const href = hrefFromKnowledge(knowledge);
+  return { href: href === "/" ? href : href.slice(0, -1), image: imageFrom(image), slug, text, title };
 }
 export const itemFromKnowledge = allowUndefined(strictItemFromKnowledge);
 

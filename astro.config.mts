@@ -17,6 +17,11 @@ export default defineConfig({
   adapter: netlify(),
   output: "server",
 
+  prefetch: {
+    defaultStrategy: "load",
+    prefetchAll: true,
+  },
+
   image: {
     service: imageService({
       placeholder: "blurhash",

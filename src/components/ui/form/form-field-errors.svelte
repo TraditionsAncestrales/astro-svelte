@@ -2,6 +2,7 @@
   import { cn } from "@/lib/utils.js";
   import type { WithoutChild } from "bits-ui";
   import * as FormPrimitive from "formsnap";
+  import { slide } from "svelte/transition";
 
   let {
     ref = $bindable(null),
@@ -14,14 +15,12 @@
   } = $props();
 </script>
 
-<FormPrimitive.FieldErrors bind:ref class={cn("text-sm font-medium text-destructive", className)} {...restProps}>
+<FormPrimitive.FieldErrors bind:ref class={cn("text-destructive text-sm font-medium", className)} {...restProps}>
   {#snippet children({ errors, errorProps })}
     {#if childrenProp}
       {@render childrenProp({ errors, errorProps })}
-    {:else}
-      {#each errors as error}
-        <div {...errorProps} class={cn(errorClasses)}>{error}</div>
-      {/each}
+    {:else if errors.length > 0}
+      <div transition:slide {...errorProps} class={cn(errorClasses)}>{errors.at(-1)}</div>
     {/if}
   {/snippet}
 </FormPrimitive.FieldErrors>

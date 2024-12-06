@@ -19,7 +19,7 @@ export default defineConfig({
     isr: { bypassToken: process.env.VERCEL_REVALIDATE_TOKEN, exclude: ["/api/invalidate"] },
   }),
 
-  prefetch: process.env.PROD ? { defaultStrategy: "load", prefetchAll: true } : undefined,
+  prefetch: process.env.NODE_ENV === "production" ? { defaultStrategy: "load", prefetchAll: true } : undefined,
 
   image: {
     service: imageService({

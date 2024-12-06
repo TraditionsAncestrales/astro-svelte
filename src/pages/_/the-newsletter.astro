@@ -22,9 +22,9 @@ const sv = await superValidate(Astro.request, zod(zNewsletterValues));
       Pour recevoir chaque semaine mon bulletin, c'est simple, vous avez juste à saisir votre courriel :
     </p>
     <Form client:visible {sv} class="flex-1">
-      <Icon slot="submit-icon" name="bi:envelope-plus" class="h-4 w-4" />
-      <Icon slot="submitting-icon" name="bi:envelope-plus" class="h-4 w-4" />
+      <Icon slot="submitIcon" name="bi:envelope-plus" class="h-4 w-4" />
+      <Icon slot="submittingIcon" name="svg-spinners:ring-resize" class="h-4 w-4" />
     </Form>
   </div>
 </Section>
-<Toaster client:visible richColors theme="light" />
+<Toaster client:load richColors theme="light" />

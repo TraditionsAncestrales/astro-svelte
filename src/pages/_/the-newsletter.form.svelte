@@ -47,16 +47,16 @@
   const { delayed, enhance, form, submitting } = sf;
 </script>
 
-<form method="POST" action={actions.subscribeToNewsletter} use:enhance class={FORM({ className })}>
+<form method="POST" action={actions.subscribeToNewsletter} novalidate use:enhance class={FORM({ className })}>
   <Form.Field form={sf} name="email" class="w-full sm:max-w-xs xl:max-w-sm">
     <Form.Control>
       {#snippet children({ props })}
         <Input {...props} type="email" placeholder="Votre courriel..." bind:value={$form.email} class={INPUT} />
       {/snippet}
     </Form.Control>
-    <Form.FieldErrors class="text-destructive-400 absolute" />
+    <Form.FieldErrors class="absolute text-destructive-400" />
   </Form.Field>
-  <Form.Button disabled={$submitting} intent="secondary" class="mt-4 w-full justify-center sm:mt-0 sm:w-auto">
+  <Form.Button disabled={$submitting} intent="secondary" class="mt-4 w-full justify-center gap-2 sm:mt-0 sm:w-auto">
     {#if $delayed}{@render submittingIcon?.()}{:else}{@render submitIcon?.()}{/if}
     Je m'inscris
   </Form.Button>

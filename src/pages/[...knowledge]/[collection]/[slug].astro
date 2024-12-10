@@ -5,15 +5,13 @@ import Title from "@/components/ui/title.astro";
 import { getPostSingle, getServiceSingle } from "@/lib/pocketbase";
 import Layout from "@/pages/_/layout.astro";
 import { Image } from "@unpic/astro";
-import { helpersFrom } from "astro-pocketbase";
 
 // PARAMS **********************************************************************************************************************************
 const { collection, slug } = Astro.params;
 
 // DATA ************************************************************************************************************************************
-const helpers = helpersFrom({ pocketbase: Astro.locals.pocketbase, cache: import.meta.env.DEV ? "1d" : undefined });
 if (!slug) return Astro.redirect("/404");
-const single = await (collection === "articles" ? getPostSingle(slug, helpers) : getServiceSingle(slug, helpers));
+const single = await (collection === "articles" ? getPostSingle(slug, Astro.locals) : getServiceSingle(slug, Astro.locals));
 if (!single) return Astro.redirect("/404");
 const { features, image, text, title } = single;
 

@@ -1,4 +1,4 @@
-import { helpersFrom, select } from "astro-pocketbase";
+import { select } from "astro-pocketbase";
 import { z } from "zod";
 import {
   zConfigRecord,
@@ -26,8 +26,6 @@ import {
   singleFromPost,
   singleFromService,
 } from "./utils";
-
-export type Helpers = ReturnType<typeof helpersFrom>;
 
 // SCHEMAS *********************************************************************************************************************************
 export const zConfig = zConfigRecord.omit({ collectionId: true, collectionName: true, created: true, updated: true });
@@ -168,3 +166,5 @@ export const getAllUrls = async (helpers: Helpers) => {
   ]);
   return [...knowledgeUrls, ...postUrls, ...serviceUrls, "/boutique"];
 };
+
+export type Helpers = Pick<App.Locals, "getRecord" | "getRecords">;

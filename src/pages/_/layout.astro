@@ -19,11 +19,10 @@ import { helpersFrom } from "astro-pocketbase";
 const { knowledge = "traditions-ancestrales" } = Astro.params;
 
 // DATA ************************************************************************************************************************************
-const helpers = helpersFrom({ pocketbase: Astro.locals.pocketbase, cache: import.meta.env.DEV ? "1d" : undefined });
 const [config, knowledges, organizationPost] = await Promise.all([
-  getConfig(helpers),
-  getKnowledges(helpers),
-  getPostItem("l-association", helpers),
+  getConfig(Astro.locals),
+  getKnowledges(Astro.locals),
+  getPostItem("l-association", Astro.locals),
 ]);
 
 // PROPS ***********************************************************************************************************************************
